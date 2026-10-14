@@ -415,10 +415,11 @@
             white-space: nowrap;
         }
 
-        .pagination > .active span {
+        .pagination > span.active {
             border-color: #25243d;
             background: #25243d;
             color: #fff;
+            font-weight: 700;
         }
 
         .pagination > .disabled {
@@ -863,7 +864,7 @@
 
                             @for ($page = 1; $page <= $laporans->lastPage(); $page++)
                                 @if ($page === $laporans->currentPage())
-                                    <span class="active" aria-current="page"><span>{{ $page }}</span></span>
+                                    <span class="active" aria-current="page">{{ $page }}</span>
                                 @else
                                     <a href="{{ $laporans->url($page) }}">{{ $page }}</a>
                                 @endif
