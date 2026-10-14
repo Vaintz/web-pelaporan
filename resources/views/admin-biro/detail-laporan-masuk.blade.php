@@ -559,13 +559,7 @@
 
     <div class="detail-page">
 
-        {{-- =========================
-        BACK
-        ========================= --}}
-        <a href="{{ route('admin.biro.laporan') }}" class="back-link">
-            <span class="back-arrow">←</span>
-            <span>Daftar Laporan / Detail Laporan</span>
-        </a>
+        
 
 
         {{-- =========================
@@ -590,51 +584,7 @@
         @endif
 
 
-        {{-- =========================
-        HEADER
-        ========================= --}}
-        <div class="detail-header">
-
-            <div class="detail-header-title">
-                Detail Laporan
-            </div>
-
-            <div class="detail-header-right">
-
-                <div class="nomor-laporan">
-                    {{ $laporan->nomor_laporan }}
-                </div>
-
-                @if ($laporan->status === 'diproses')
-
-                    <div class="status-header">
-                        Menunggu Verifikasi
-                    </div>
-
-                @elseif ($laporan->status === 'diverifikasi')
-
-                    <div class="status-header">
-                        Siap Ditangani
-                    </div>
-
-                @elseif ($laporan->status === 'ditugaskan')
-
-                    <div class="status-header">
-                        Sedang Ditangani
-                    </div>
-
-                @else
-
-                    <div class="status-header">
-                        {{ ucfirst($laporan->status) }}
-                    </div>
-
-                @endif
-
-            </div>
-
-        </div>
-
+        
 
         {{-- =========================
         INFORMASI

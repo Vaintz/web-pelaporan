@@ -415,18 +415,7 @@
 
         <div class="ba-header-left">
 
-            <div class="ba-breadcrumb" onclick="history.back()">
-                <span>←</span>
-                Berita Acara / Detail Berita Acara
-            </div>
-
-            <h1 class="ba-title">
-                Berita Acara Laporan
-            </h1>
-
-            <p class="ba-subtitle">
-                Berikut adalah berita acara dari laporan yang telah diverifikasi dan diteruskan.
-            </p>
+            
 
             <div class="ba-number-row">
 

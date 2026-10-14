@@ -492,19 +492,7 @@
 
     <div class="ba-page">
 
-        {{-- =========================
-        HEADER
-        ========================== --}}
-
-        <div class="page-title">
-
-            <h1>Berita Acara</h1>
-
-            <p>
-                Daftar berita acara dari laporan yang telah diverifikasi oleh Admin Fakultas.
-            </p>
-
-        </div>
+       
 
 
         {{-- =========================
