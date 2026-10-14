@@ -831,15 +831,20 @@ class LaporanController extends Controller
         );
     }
 
-    public function selesaikanLaporan(Laporan $laporan)
+    public function selesaikanLaporan(Request $request, Laporan $laporan)
     {
         // Hanya laporan yang sedang ditugaskan
         if ($laporan->status !== 'ditugaskan') {
             return back()->with('error', 'Laporan belum berstatus ditugaskan.');
         }
 
+        $validated = $request->validate([
+            'deskripsi_tindak_lanjut' => ['required', 'string', 'max:5000'],
+        ]);
+
         $laporan->update([
             'status' => 'selesai',
+            'deskripsi_tindak_lanjut' => $validated['deskripsi_tindak_lanjut'],
         ]);
 
         // Teknisi kembali tersedia
