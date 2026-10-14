@@ -973,6 +973,22 @@
 
                 </div>
 
+                {{-- DESKRIPSI TINDAK LANJUT DARI ADMIN BIRO --}}
+
+                @if($laporan->status === 'selesai')
+                    <div class="instruction-box">
+
+                        <div class="info-label">
+                            Deskripsi Tindak Lanjut
+                        </div>
+
+                        <div class="note-box">
+                            {{ $laporan->deskripsi_tindak_lanjut ?? 'Belum ada deskripsi tindak lanjut.' }}
+                        </div>
+
+                    </div>
+                @endif
+
             </div>
 
         </div>
