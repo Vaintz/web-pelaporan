@@ -673,7 +673,7 @@
 
                     </div>
 
-                    <div class="label">Catatan Admin Fakultas</div>
+                    <div class="label">Catatan KBU Fakultas Teknik</div>
                     <div class="colon">:</div>
                     <div class="value">
                         {{ $laporan->catatan_verifikasi ?? '-' }}
@@ -705,10 +705,10 @@
                         {{ $tanggalBeritaAcara?->translatedFormat('d F Y') ?? '-' }}
                     </div>
 
-                    <div class="label">Admin Fakultas</div>
+                    <div class="label">KBU Fakultas Teknik</div>
                     <div class="colon">:</div>
                     <div class="value">
-                        {{ auth()->user()?->name ?? '-' }}
+                        ROSMANITA, S.H, M.H
                     </div>
 
                     <div class="label">Catatan Penerusan</div>
@@ -780,12 +780,12 @@
 
                     <tr>
                         <td>Nama</td>
-                        <td>: {{ auth()->user()?->name ?? '-' }}</td>
+                        <td>: ROSMANITA, S.H, M.H</td>
                     </tr>
 
                     <tr>
                         <td>Jabatan</td>
-                        <td>: Admin Fakultas</td>
+                        <td>: KBU Fakultas Teknik</td>
                     </tr>
 
                     <tr>
@@ -848,7 +848,7 @@
 
                 <p class="doc-paragraph">
                     Berdasarkan hasil verifikasi, laporan tersebut telah diverifikasi
-                    oleh Admin Fakultas dan diteruskan kepada
+                    oleh KBU Fakultas Teknik dan diteruskan kepada
                     <strong>Biro Umum dan Keuangan</strong>
                     untuk proses penanganan lebih lanjut.
                 </p>
@@ -898,16 +898,16 @@
 
                         <div>
                             Diverifikasi oleh,<br>
-                            Admin Fakultas
+                            KBU Fakultas Teknik
 
                             <div class="signature-space"></div>
 
                             <div class="signature-name">
-                                {{ auth()->user()?->name ?? '__________________________' }}
+                                ROSMANITA, S.H, M.H
                             </div>
 
                             <div>
-                                NIP. {{ auth()->user()?->nim_nip ?? '-' }}
+                                NIP. 197912052002122002
                             </div>
                         </div>
 
