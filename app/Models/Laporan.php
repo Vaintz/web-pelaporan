@@ -29,6 +29,7 @@ class Laporan extends Model
         'tanggal_penugasan',
         'target_selesai',
         'instruksi_teknisi',
+        'deskripsi_tindak_lanjut',
     ];
 
     protected $casts = [
