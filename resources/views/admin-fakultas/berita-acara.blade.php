@@ -391,7 +391,39 @@
         .pagination {
             display: flex;
             align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
             gap: 6px;
+            min-width: 0;
+        }
+
+        .pagination > a,
+        .pagination > span {
+            min-width: 35px;
+            height: 35px;
+            box-sizing: border-box;
+            padding: 0 10px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #c3c8d2;
+            border-radius: 8px;
+            background: #fff;
+            color: #777e8c;
+            text-decoration: none;
+            font-size: 11px;
+            white-space: nowrap;
+        }
+
+        .pagination > .active span {
+            border-color: #25243d;
+            background: #25243d;
+            color: #fff;
+        }
+
+        .pagination > .disabled {
+            color: #c1c5cd;
+            pointer-events: none;
         }
 
         .pagination a,
@@ -846,10 +878,28 @@
 
                 <div class="table-footer">
 
-                    <div class="pagination">
+                    <div class="pagination" aria-label="Navigasi halaman">
+                        @if ($laporans->hasPages())
+                            <a href="{{ $laporans->previousPageUrl() ?? '#' }}"
+                               class="{{ $laporans->onFirstPage() ? 'disabled' : '' }}"
+                               @if($laporans->onFirstPage()) aria-disabled="true" tabindex="-1" @endif>
+                                &lsaquo; Sebelumnya
+                            </a>
 
-                        {{ $laporans->onEachSide(1)->links('pagination::simple-tailwind') }}
+                            @for ($page = 1; $page <= $laporans->lastPage(); $page++)
+                                @if ($page === $laporans->currentPage())
+                                    <span class="active" aria-current="page"><span>{{ $page }}</span></span>
+                                @else
+                                    <a href="{{ $laporans->url($page) }}">{{ $page }}</a>
+                                @endif
+                            @endfor
 
+                            <a href="{{ $laporans->nextPageUrl() ?? '#' }}"
+                               class="{{ $laporans->hasMorePages() ? '' : 'disabled' }}"
+                               @unless($laporans->hasMorePages()) aria-disabled="true" tabindex="-1" @endunless>
+                                Berikutnya &rsaquo;
+                            </a>
+                        @endif
                     </div>
 
 

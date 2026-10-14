@@ -275,6 +275,10 @@
     .ba-pagination {
         display: flex;
         align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 5px;
+        min-width: 0;
     }
 
     .ba-pagination nav {
@@ -305,9 +309,16 @@
         color: #4a495b;
     }
 
-    .ba-pagination span[aria-current="page"] {
+    .ba-pagination .is-active {
+        border: 1px solid #25243a;
         background: #25243a;
         color: #fff;
+    }
+
+    .ba-pagination .is-disabled {
+        border: 1px solid #ececf0;
+        color: #bfc1ca;
+        pointer-events: none;
     }
 
     .ba-per-page {
@@ -650,8 +661,28 @@
 
                 </div>
 
-                <div class="ba-pagination">
-                    {{ $laporans->links() }}
+                <div class="ba-pagination" aria-label="Navigasi halaman">
+                    @if ($laporans->hasPages())
+                        <a href="{{ $laporans->previousPageUrl() ?? '#' }}"
+                           class="{{ $laporans->onFirstPage() ? 'is-disabled' : '' }}"
+                           @if($laporans->onFirstPage()) aria-disabled="true" tabindex="-1" @endif>
+                            &lsaquo; Sebelumnya
+                        </a>
+
+                        @for ($page = 1; $page <= $laporans->lastPage(); $page++)
+                            @if ($page === $laporans->currentPage())
+                                <span class="is-active" aria-current="page">{{ $page }}</span>
+                            @else
+                                <a href="{{ $laporans->url($page) }}">{{ $page }}</a>
+                            @endif
+                        @endfor
+
+                        <a href="{{ $laporans->nextPageUrl() ?? '#' }}"
+                           class="{{ $laporans->hasMorePages() ? '' : 'is-disabled' }}"
+                           @unless($laporans->hasMorePages()) aria-disabled="true" tabindex="-1" @endunless>
+                            Berikutnya &rsaquo;
+                        </a>
+                    @endif
                 </div>
 
             </div>
