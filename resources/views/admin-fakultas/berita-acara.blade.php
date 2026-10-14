@@ -426,31 +426,6 @@
             pointer-events: none;
         }
 
-        .pagination a,
-        .pagination span {
-            width: 35px;
-            height: 35px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid #c3c8d2;
-            border-radius: 8px;
-            background: #fff;
-            color: #777e8c;
-            text-decoration: none;
-            font-size: 11px;
-        }
-
-        .pagination .active span {
-            background: #25243d;
-            border-color: #25243d;
-            color: #fff;
-        }
-
-        .pagination .disabled span {
-            color: #c1c5cd;
-        }
-
         .pagination svg {
             width: 15px;
             height: 15px;
