@@ -708,61 +708,18 @@
             </div>
 
 
-            {{-- BUKTI --}}
+            {{-- DESKRIPSI TINDAK LANJUT --}}
             <div class="ba-info-card">
 
                 <h3 class="ba-card-title">
-                    BUKTI TINDAK LANJUT
+                    DESKRIPSI TINDAK LANJUT
                 </h3>
 
-                <div class="ba-photo-grid">
-
-                    @forelse($laporan->foto as $file)
-
-                        @php
-                            $fotoPath = $file->foto;
-
-                            $fotoUrl =
-                                str_starts_with($fotoPath, 'http://')
-                                || str_starts_with($fotoPath, 'https://')
-                                ? $fotoPath
-                                : asset(
-                                    'storage/' .
-                                    ltrim($fotoPath, '/')
-                                );
-                        @endphp
-
-                        <div
-                            class="ba-photo"
-                            onclick="window.open(
-                                '{{ $fotoUrl }}',
-                                '_blank'
-                            )"
-                        >
-
-                            <img
-                                src="{{ $fotoUrl }}"
-                                alt="Bukti laporan"
-                            >
-
-                            <div class="ba-photo-icon">
-                                ⌕
-                            </div>
-
-                        </div>
-
-                    @empty
-
-                        <div class="ba-no-photo">
-                            Belum ada foto/bukti tindak lanjut.
-                        </div>
-
-                    @endforelse
-
+                <div class="ba-value ba-description">
+                    {{ $laporan->deskripsi_tindak_lanjut ?? 'Belum ada deskripsi tindak lanjut.' }}
                 </div>
 
             </div>
-
         </div>
 
 
