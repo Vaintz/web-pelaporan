@@ -1311,18 +1311,28 @@
 
                     </div>
 
-                    <div class="assignment-actions">
-
+                    <div style="margin-top: 18px;">
+                        <label class="assignment-label" for="deskripsi_tindak_lanjut">
+                            Deskripsi Tindak Lanjut
+                        </label>
                         <form action="{{ route('admin.biro.laporan.selesai', $laporan->id) }}" method="POST"
                             onsubmit="return confirm('Apakah Anda yakin laporan ini sudah selesai ditangani?');">
                             @csrf
 
-                            <button type="submit" class="btn-selesai">
-                                Tandai Selesai
-                            </button>
+                            <textarea
+                                name="deskripsi_tindak_lanjut"
+                                id="deskripsi_tindak_lanjut"
+                                class="form-control"
+                                style="height: 100px;"
+                                placeholder="Tuliskan hasil tindak lanjut atau pekerjaan yang telah dilakukan..."
+                                required>{{ old('deskripsi_tindak_lanjut') }}</textarea>
 
+                            <div class="assignment-actions">
+                                <button type="submit" class="btn-selesai">
+                                    Simpan dan Tandai Selesai
+                                </button>
+                            </div>
                         </form>
-
                     </div>
 
                 @endif
