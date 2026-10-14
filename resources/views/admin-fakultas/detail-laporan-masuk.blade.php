@@ -645,34 +645,7 @@
          HEADER
     ===================================================== --}}
 
-    <div class="detail-header">
-
-        <div class="breadcrumb-detail">
-
-            <a href="{{ route('admin.fakultas.laporan') }}">
-                ←
-            </a>
-
-            <a href="{{ route('admin.fakultas.laporan') }}">
-                Daftar Laporan
-            </a>
-
-            <span>/</span>
-
-            <span>
-                Detail Laporan
-            </span>
-
-        </div>
-
-
-        <div class="detail-title">
-
-            <h2>
-                Detail Laporan
-            </h2>
-
-        </div>
+    
 
 
         <div class="report-number">

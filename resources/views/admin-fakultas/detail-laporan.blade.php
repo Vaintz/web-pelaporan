@@ -605,18 +605,7 @@
        PAGE TITLE
     ====================================================== --}}
 
-    <div class="page-title">
-
-        <h1>
-            Detail Laporan
-        </h1>
-
-        <p>
-            Informasi lengkap mengenai laporan kerusakan yang diajukan.
-        </p>
-
-    </div>
-
+   
 
     {{-- =====================================================
        MAIN CARD
