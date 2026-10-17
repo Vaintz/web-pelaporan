@@ -4,15 +4,15 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
-    public function up(): void
+return new class extends Migration {
+    public function up()
     {
         Schema::table('laporans', function (Blueprint $table) {
-            $table->foreign('teknisi_id')
-                ->references('id')
-                ->on('teknisi')
-                ->nullOnDelete();
+            // Hapus relasi yang lama dulu (abaikan jika tidak ada)
+            $table->dropForeign(['teknisi_id']);
+
+            // Baru buat yang baru
+            $table->foreign('teknisi_id')->references('id')->on('teknisi')->onDelete('set null');
         });
     }
 
