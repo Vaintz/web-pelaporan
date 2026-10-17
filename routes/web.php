@@ -22,8 +22,7 @@ use App\Http\Controllers\TeknisiController;
 // LOGIN
 // ====================
 
-Route::get('/', [AuthController::class, 'showLogin'])
-    ->name('login');
+Route::get('/', [AuthController::class, 'showLogin']);
 
 Route::get('/login', [AuthController::class, 'showLogin'])
     ->name('login');
