@@ -66,6 +66,7 @@ class GedungController extends Controller
     public function storeLantai(Request $request, $gedungId)
     {
         $gedung = Gedung::findOrFail($gedungId);
+        $request->merge(['nama' => trim((string) $request->input('nama', ''))]);
 
         $validated = $request->validate([
             'nama' => [
