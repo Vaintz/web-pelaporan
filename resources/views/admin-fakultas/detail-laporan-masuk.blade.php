@@ -750,7 +750,7 @@
                         {{ $laporan->gedung->nama ?? '-' }}
 
                         @if($laporan->lantai)
-                            , Lantai {{ $laporan->lantai }}
+                            , {{ preg_match('/^lantai\\s*/i', trim($laporan->lantai)) ? trim($laporan->lantai) : 'Lantai ' . trim($laporan->lantai) }}
                         @endif
 
                         @if($laporan->ruangan)
