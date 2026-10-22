@@ -11,7 +11,7 @@ class GedungController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Gedung::withCount('ruangans');
+        $query = Gedung::withCount('lantais');
 
         if ($request->filled('search')) {
             $query->where('nama', 'like', '%' . $request->search . '%');
