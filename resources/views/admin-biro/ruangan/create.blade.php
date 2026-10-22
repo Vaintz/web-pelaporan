@@ -37,7 +37,17 @@
 
                 <div>
                     <label style="display: block; font-size: 12px; font-weight: 600; color: #334155; margin-bottom: 6px;">Posisi Lantai</label>
-                    <input type="text" name="lantai" value="{{ old('lantai') }}" placeholder="Contoh: 1, 2, atau Dasar" style="width: 100%; padding: 12px 14px; border: 1px solid #cbd5e1; border-radius: 12px; font-size: 14px; outline: none;" required>
+                    <select name="lantai" style="width: 100%; padding: 12px 14px; border: 1px solid #cbd5e1; border-radius: 12px; font-size: 14px; outline: none; background: white;" required>
+                        <option value="">-- Pilih Lantai --</option>
+                        @foreach($listGedung as $gedungItem)
+                            <optgroup label="{{ $gedungItem->nama }}">
+                                @foreach($gedungItem->lantais as $lantaiItem)
+                                    <option value="{{ $lantaiItem->nama }}" {{ old('lantai', '') == $lantaiItem->nama ? 'selected' : '' }}>{{ $lantaiItem->nama }}</option>
+                                @endforeach
+                            </optgroup>
+                        @endforeach
+                    </select>
+                    <small style="display: block; margin-top: 6px; color: #64748b;">Pilihan lantai dikelola dari halaman Data Master Gedung.</small>
                 </div>
 
                 <div>
