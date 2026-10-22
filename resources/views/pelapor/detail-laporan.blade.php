@@ -926,7 +926,7 @@
 
                     <div class="location-value">
 
-                        Lantai {{ $laporan->ruangan ?? '-' }}
+                        {{ $laporan->lantai ? 'Lantai ' . $laporan->lantai : '-' }}
 
                     </div>
 
