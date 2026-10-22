@@ -21,8 +21,14 @@
     $targetSelesai =
         $laporan->target_selesai;
 
+    $lantai = trim((string) ($laporan->lantai ?? ''));
+    if ($lantai !== '' && !preg_match('/^lantai\\s*/i', $lantai)) {
+        $lantai = 'Lantai ' . $lantai;
+    }
+
     $lokasi = collect([
         $laporan->gedung?->nama,
+        $lantai,
         $laporan->ruangan,
         $laporan->detail_lokasi,
     ])->filter()->implode(' ');
