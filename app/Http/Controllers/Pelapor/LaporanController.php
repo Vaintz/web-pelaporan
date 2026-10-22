@@ -264,7 +264,7 @@ class LaporanController extends Controller
                 'required',
                 'string',
                 'max:50',
-                Illuminate\Validation\Rule::exists('lantais', 'nama')
+                \Illuminate\Validation\Rule::exists('lantais', 'nama')
                     ->where('gedung_id', $request->input('gedung_id')),
             ],
 
