@@ -27,6 +27,13 @@
             {{ session('error') }}
         </div>
     @endif
+    @if($errors->any())
+        <div style="background: #fff7ed; color: #9a3412; padding: 12px 18px; border-radius: 12px; font-size: 13px;">
+            @foreach($errors->all() as $error)
+                <div>{{ $error }}</div>
+            @endforeach
+        </div>
+    @endif
 
     <!-- SEARCH BAR -->
     <div style="background: white; padding: 20px 30px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
@@ -67,14 +74,14 @@
                         <td style="padding: 15px 10px; min-width: 260px;">
                             <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px;">
                                 @forelse($gedung->lantais as $lantai)
-                                    <span style="display: inline-flex; align-items: center; gap: 6px; background: #eef2ff; color: #3730a3; padding: 5px 8px; border-radius: 8px; font-size: 12px; font-weight: 600;">
+                                    <div style="display: inline-flex; align-items: center; gap: 6px; background: #eef2ff; color: #3730a3; padding: 5px 8px; border-radius: 8px; font-size: 12px; font-weight: 600;">
                                         {{ $lantai->nama }}
                                         <form action="{{ route('admin.biro.gedung.lantai.destroy', [$gedung->id, $lantai->id]) }}" method="POST" style="display: inline;" onsubmit="return confirm('Hapus lantai {{ $lantai->nama }}?')">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" title="Hapus lantai" style="border: 0; background: transparent; color: #991b1b; cursor: pointer; font-weight: 700; padding: 0 2px;">×</button>
                                         </form>
-                                    </span>
+                                    </div>
                                 @empty
                                     <span style="color: #94a3b8; font-size: 12px;">Belum ada lantai</span>
                                 @endforelse
