@@ -915,7 +915,10 @@
 
                     <div class="location-value">
 
-                        -
+                        @php
+                            $lantaiLaporan = trim((string) ($laporan->lantai ?? ''));
+                        @endphp
+                        {{ $lantaiLaporan === '' ? '-' : (preg_match('/^lantai\\s*/i', $lantaiLaporan) ? $lantaiLaporan : 'Lantai ' . $lantaiLaporan) }}
 
                     </div>
 
