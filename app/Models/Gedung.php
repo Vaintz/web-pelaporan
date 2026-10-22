@@ -10,6 +10,11 @@ class Gedung extends Model
         'nama',
     ];
 
+    public function lantais()
+    {
+        return $this->hasMany(Lantai::class);
+    }
+
     public function ruangans()
     {
         return $this->hasMany(Ruangan::class);
