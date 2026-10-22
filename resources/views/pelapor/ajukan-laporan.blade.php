@@ -1166,85 +1166,57 @@
 
 
     <script>
+        // Daftar lantai berasal dari Data Master Gedung, bukan dari data ruangan.
+        const gedungData = @json($gedungs->map(fn ($gedung) => [
+            'id' => $gedung->id,
+            'lantais' => $gedung->lantais->map(fn ($lantai) => [
+                'nama' => $lantai->nama,
+            ])->values(),
+        ])->values());
 
-        /* =========================================================
-           DATA RUANGAN
-        ========================================================= */
-
-        const ruanganData = @json($ruangans);
-
-        const gedungSelect =
-            document.getElementById('gedung');
-
-        const lantaiSelect =
-            document.getElementById('lantai');
+        const gedungSelect = document.getElementById('gedung');
+        const lantaiSelect = document.getElementById('lantai');
+        const lantaiLama = @json(old('lantai'));
 
         function updateLantai() {
-
-            const gedungId =
-                gedungSelect.value;
-
-            lantaiSelect.innerHTML =
-                '<option value="">Pilih Lantai</option>';
+            const gedungId = gedungSelect.value;
+            lantaiSelect.innerHTML = '<option value="">Pilih Lantai</option>';
 
             if (!gedungId) {
+                lantaiSelect.disabled = true;
                 return;
             }
 
-            const filtered =
-                ruanganData.filter(
-                    item =>
-                        String(item.gedung_id)
-                        === String(gedungId)
-                );
-
-            const lantai = [
-                ...new Set(
-                    filtered.map(
-                        item => item.lantai
-                    )
-                )
-            ];
-
-            lantai.sort(
-                (a, b) =>
-                    String(a).localeCompare(
-                        String(b),
-                        undefined,
-                        { numeric: true }
-                    )
+            const gedungTerpilih = gedungData.find(
+                item => String(item.id) === String(gedungId)
             );
 
-            lantai.forEach(value => {
+            const daftarLantai = gedungTerpilih ? gedungTerpilih.lantais : [];
 
-                const option =
-                    document.createElement('option');
+            daftarLantai
+                .slice()
+                .sort((a, b) => String(a.nama).localeCompare(
+                    String(b.nama),
+                    undefined,
+                    { numeric: true }
+                ))
+                .forEach(item => {
+                    const option = document.createElement('option');
+                    option.value = item.nama;
+                    option.textContent = item.nama;
+                    option.selected = String(item.nama) === String(lantaiLama ?? '');
+                    lantaiSelect.appendChild(option);
+                });
 
-                option.value = value;
+            lantaiSelect.disabled = daftarLantai.length === 0;
 
-                option.textContent =
-                    'Lantai ' + value;
-
-                if (
-                    String(value)
-                    === String("{{ old('lantai') }}")
-                ) {
-                    option.selected = true;
-                }
-
-                lantaiSelect.appendChild(option);
-            });
+            if (daftarLantai.length === 0) {
+                lantaiSelect.innerHTML = '<option value="">Belum ada lantai untuk gedung ini</option>';
+            }
         }
 
-        gedungSelect.addEventListener(
-            'change',
-            updateLantai
-        );
-
-        if (gedungSelect.value) {
-            updateLantai();
-        }
-
+        gedungSelect.addEventListener('change', updateLantai);
+        updateLantai();
     </script>
 
 @endsection
