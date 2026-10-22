@@ -36,7 +36,7 @@ class RuanganController extends Controller
 
     public function create()
     {
-        $listGedung = Gedung::all();
+        $listGedung = Gedung::with('lantais')->get();
         return view('admin-biro.ruangan.create', compact('listGedung'));
     }
 
@@ -65,7 +65,7 @@ class RuanganController extends Controller
     public function edit($id)
     {
         $ruangan = Ruangan::findOrFail($id);
-        $listGedung = Gedung::all();
+        $listGedung = Gedung::with('lantais')->get();
         return view('admin-biro.ruangan.edit', compact('ruangan', 'listGedung'));
     }
 
@@ -75,11 +75,12 @@ class RuanganController extends Controller
 
         $request->validate([
             'gedung_id' => 'required|exists:gedungs,id',
-            'lantai'    => 'required|string|max:50',
+            'lantai'    => ['required', 'string', 'max:50', Rule::exists('lantais', 'nama')->where(fn ($query) => $query->where('gedung_id', $request->input('gedung_id')))],
             'nama'      => 'required|string|max:255',
         ], [
             'gedung_id.required' => 'Pilih gedung terlebih dahulu.',
-            'lantai.required'    => 'Lantai wajib diisi.',
+            'lantai.required'    => 'Pilih lantai terlebih dahulu.',
+            'lantai.exists'      => 'Lantai tidak terdaftar pada gedung yang dipilih.',
             'nama.required'      => 'Nama ruangan wajib diisi.',
         ]);
 
