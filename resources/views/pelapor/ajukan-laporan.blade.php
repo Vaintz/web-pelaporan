@@ -1167,12 +1167,7 @@
 
     <script>
         // Daftar lantai berasal dari Data Master Gedung, bukan dari data ruangan.
-        const gedungData = @json($gedungs->map(fn ($gedung) => [
-            'id' => $gedung->id,
-            'lantais' => $gedung->lantais->map(fn ($lantai) => [
-                'nama' => $lantai->nama,
-            ])->values(),
-        ])->values());
+        const gedungData = @json($gedungData);
 
         const gedungSelect = document.getElementById('gedung');
         const lantaiSelect = document.getElementById('lantai');
