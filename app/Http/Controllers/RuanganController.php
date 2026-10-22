@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Gedung;
 use App\Models\Ruangan;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class RuanganController extends Controller
 {
@@ -28,7 +29,7 @@ class RuanganController extends Controller
         }
 
         $ruangans = $query->latest()->get();
-        $listGedung = Gedung::all();
+        $listGedung = Gedung::with('lantais')->get();
 
         return view('admin-biro.ruangan.index', compact('ruangans', 'listGedung'));
     }
@@ -43,11 +44,12 @@ class RuanganController extends Controller
     {
         $request->validate([
             'gedung_id' => 'required|exists:gedungs,id',
-            'lantai'    => 'required|string|max:50',
+            'lantai'    => ['required', 'string', 'max:50', Rule::exists('lantais', 'nama')->where(fn ($query) => $query->where('gedung_id', $request->input('gedung_id')))],
             'nama'      => 'required|string|max:255',
         ], [
             'gedung_id.required' => 'Pilih gedung terlebih dahulu.',
-            'lantai.required'    => 'Lantai wajib diisi.',
+            'lantai.required'    => 'Pilih lantai terlebih dahulu.',
+            'lantai.exists'      => 'Lantai tidak terdaftar pada gedung yang dipilih.',
             'nama.required'      => 'Nama ruangan wajib diisi.',
         ]);
 
