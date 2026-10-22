@@ -260,6 +260,14 @@ class LaporanController extends Controller
             'gedung_id' =>
                 'required|exists:gedungs,id',
 
+            'lantai' => [
+                'required',
+                'string',
+                'max:50',
+                Illuminate\Validation\Rule::exists('lantais', 'nama')
+                    ->where('gedung_id', $request->input('gedung_id')),
+            ],
+
             'ruangan' =>
                 'required|string|max:255',
 
@@ -292,6 +300,9 @@ class LaporanController extends Controller
 
                 'gedung_id' =>
                     $request->gedung_id,
+
+                'lantai' =>
+                    $request->lantai,
 
                 'ruangan' =>
                     $request->ruangan,
