@@ -926,7 +926,7 @@
 
                     <div class="location-value">
 
-                        {{ $laporan->lantai ? 'Lantai ' . $laporan->lantai : '-' }}
+                        {{ $laporan->lantai ? (preg_match('/^lantai\s*/i', trim($laporan->lantai)) ? trim($laporan->lantai) : 'Lantai ' . trim($laporan->lantai)) : '-' }}
 
                     </div>
 
