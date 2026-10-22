@@ -12,6 +12,7 @@ class Laporan extends Model
         'user_id',
         'kategori_kerusakan_id',
         'gedung_id',
+        'lantai',
         'ruangan',
         'judul_laporan',
         'deskripsi_kerusakan',
