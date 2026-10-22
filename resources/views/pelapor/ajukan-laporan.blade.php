@@ -1166,6 +1166,103 @@
 
 
     <script>
+        // Preview foto yang dipilih sebelum laporan dikirim.
+        const fotoInput = document.getElementById('foto');
+        const previewContainer = document.getElementById('preview-container');
+        const photoCount = document.getElementById('photo-count');
+        const uploadBox = document.querySelector('.upload-box');
+        let fotoTerpilih = [];
+
+        function tampilkanPreviewFoto() {
+            previewContainer.innerHTML = '';
+            photoCount.textContent = fotoTerpilih.length
+                ? fotoTerpilih.length + ' foto dipilih.'
+                : 'Belum ada foto dipilih.';
+
+            fotoTerpilih.forEach((file, index) => {
+                const item = document.createElement('div');
+                item.className = 'preview-item';
+
+                const gambar = document.createElement('img');
+                gambar.alt = file.name;
+                gambar.src = URL.createObjectURL(file);
+                gambar.onload = () => URL.revokeObjectURL(gambar.src);
+
+                const hapus = document.createElement('button');
+                hapus.type = 'button';
+                hapus.className = 'preview-remove';
+                hapus.textContent = '×';
+                hapus.setAttribute('aria-label', 'Hapus ' + file.name);
+                hapus.addEventListener('click', () => {
+                    fotoTerpilih.splice(index, 1);
+                    sinkronkanFotoInput();
+                });
+
+                item.appendChild(gambar);
+                item.appendChild(hapus);
+                previewContainer.appendChild(item);
+            });
+        }
+
+        function sinkronkanFotoInput() {
+            const dataTransfer = new DataTransfer();
+            fotoTerpilih.forEach(file => dataTransfer.items.add(file));
+            fotoInput.files = dataTransfer.files;
+            tampilkanPreviewFoto();
+        }
+
+        function tambahFoto(files) {
+            const pesan = [];
+            Array.from(files).forEach(file => {
+                if (!['image/jpeg', 'image/png'].includes(file.type)) {
+                    pesan.push(file.name + ': format harus JPG atau PNG.');
+                    return;
+                }
+                if (file.size > 5 * 1024 * 1024) {
+                    pesan.push(file.name + ': ukuran melebihi 5 MB.');
+                    return;
+                }
+                if (fotoTerpilih.length >= 5) {
+                    pesan.push('Maksimal 5 foto.');
+                    return;
+                }
+                if (fotoTerpilih.some(existing =>
+                    existing.name === file.name &&
+                    existing.size === file.size &&
+                    existing.lastModified === file.lastModified
+                )) {
+                    return;
+                }
+                fotoTerpilih.push(file);
+            });
+
+            sinkronkanFotoInput();
+            if (pesan.length) {
+                photoCount.textContent = fotoTerpilih.length
+                    ? fotoTerpilih.length + ' foto dipilih. ' + pesan.join(' ')
+                    : pesan.join(' ');
+            }
+        }
+
+        fotoInput.addEventListener('change', function () {
+            tambahFoto(this.files);
+        });
+
+        uploadBox.addEventListener('dragover', function (event) {
+            event.preventDefault();
+            uploadBox.style.background = '#f3f4f6';
+        });
+
+        uploadBox.addEventListener('dragleave', function () {
+            uploadBox.style.background = '';
+        });
+
+        uploadBox.addEventListener('drop', function (event) {
+            event.preventDefault();
+            uploadBox.style.background = '';
+            tambahFoto(event.dataTransfer.files);
+        });
+
         // Daftar lantai berasal dari Data Master Gedung, bukan dari data ruangan.
         const gedungData = @json($gedungData);
 
