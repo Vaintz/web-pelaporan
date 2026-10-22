@@ -219,19 +219,15 @@ class LaporanController extends Controller
         // Kategori kerusakan
         $kategori = KategoriKerusakan::orderBy('nama')->get();
 
-        // Gedung
-        $gedungs = Gedung::orderBy('nama')->get();
-
-        // Ruangan tetap dipakai untuk daftar lantai
-        $ruangans = Ruangan::orderBy('nama')->get();
+        // Gedung beserta lantai dari Data Master Gedung
+        $gedungs = Gedung::with('lantais')->orderBy('nama')->get();
 
         return view(
             'pelapor.ajukan-laporan',
             compact(
                 'user',
                 'kategori',
-                'gedungs',
-                'ruangans'
+                'gedungs'
             )
         );
     }
