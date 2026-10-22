@@ -222,12 +222,25 @@ class LaporanController extends Controller
         // Gedung beserta lantai dari Data Master Gedung
         $gedungs = Gedung::with('lantais')->orderBy('nama')->get();
 
+        // Siapkan data sederhana untuk dropdown lantai di JavaScript.
+        $gedungData = $gedungs->map(function ($gedung) {
+            return [
+                'id' => $gedung->id,
+                'lantais' => $gedung->lantais->map(function ($lantai) {
+                    return [
+                        'nama' => $lantai->nama,
+                    ];
+                })->values(),
+            ];
+        })->values();
+
         return view(
             'pelapor.ajukan-laporan',
             compact(
                 'user',
                 'kategori',
-                'gedungs'
+                'gedungs',
+                'gedungData'
             )
         );
     }
