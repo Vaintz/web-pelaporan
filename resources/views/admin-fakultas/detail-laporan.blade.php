@@ -787,7 +787,7 @@
                     </span>
 
                     <span class="info-value">
-                        {{ ucfirst($laporan->status ?? '-') }}
+                        {{ ucwords(str_replace('_', ' ', $laporan->status ?? '-')) }}
                     </span>
 
                 </div>
