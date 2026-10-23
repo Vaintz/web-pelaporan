@@ -386,8 +386,6 @@ Route::middleware(['auth', 'role:admin_biro'])
 
         // ROUTE CRUD (RESOURCE)
         Route::resource('prodi', ProdiController::class)->except(['show']);
-        Route::post('gedung/{gedung}/lantai', [GedungController::class, 'storeLantai'])->name('gedung.lantai.store');
-        Route::delete('gedung/{gedung}/lantai/{lantai}', [GedungController::class, 'destroyLantai'])->name('gedung.lantai.destroy');
         Route::resource('gedung', GedungController::class)->except(['show']);
         Route::resource('ruangan', RuanganController::class)->except(['show']);
         Route::resource('kategori-kerusakan', KategoriKerusakanController::class)->except(['show']);
