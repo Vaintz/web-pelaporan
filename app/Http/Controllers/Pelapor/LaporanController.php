@@ -219,28 +219,15 @@ class LaporanController extends Controller
         // Kategori kerusakan
         $kategori = KategoriKerusakan::orderBy('nama')->get();
 
-        // Gedung beserta lantai dari Data Master Gedung
-        $gedungs = Gedung::with('lantais')->orderBy('nama')->get();
-
-        // Siapkan data sederhana untuk dropdown lantai di JavaScript.
-        $gedungData = $gedungs->map(function ($gedung) {
-            return [
-                'id' => $gedung->id,
-                'lantais' => $gedung->lantais->map(function ($lantai) {
-                    return [
-                        'nama' => $lantai->nama,
-                    ];
-                })->values(),
-            ];
-        })->values();
+        // Daftar gedung untuk pilihan lokasi laporan.
+        $gedungs = Gedung::orderBy('nama')->get();
 
         return view(
             'pelapor.ajukan-laporan',
             compact(
                 'user',
                 'kategori',
-                'gedungs',
-                'gedungData'
+                'gedungs'
             )
         );
     }
@@ -260,13 +247,8 @@ class LaporanController extends Controller
             'gedung_id' =>
                 'required|exists:gedungs,id',
 
-            'lantai' => [
-                'required',
-                'string',
-                'max:50',
-                \Illuminate\Validation\Rule::exists('lantais', 'nama')
-                    ->where('gedung_id', $request->input('gedung_id')),
-            ],
+            'lantai' =>
+                'required|string|max:50',
 
             'ruangan' =>
                 'required|string|max:255',
