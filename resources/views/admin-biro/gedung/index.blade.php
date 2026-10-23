@@ -39,8 +39,7 @@
                 <tr style="border-bottom: 2px solid #f1f5f9; color: #64748b; font-size: 12px; text-transform: uppercase;">
                     <th style="padding: 12px 10px; width: 60px;">No</th>
                     <th style="padding: 12px 10px;">Nama Gedung</th>
-                    <th style="padding: 12px 10px;">Jumlah Lantai</th>
-                    <th style="padding: 12px 10px; text-align: center; width: 180px;">Aksi</th>
+                                        <th style="padding: 12px 10px; text-align: center; width: 180px;">Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -48,9 +47,6 @@
                     <tr style="border-bottom: 1px solid #f1f5f9;">
                         <td style="padding: 15px 10px; color: #64748b; font-weight: 600;">{{ $loop->iteration }}</td>
                         <td style="padding: 15px 10px; font-weight: 600; color: #1e293b;">{{ $gedung->nama }}</td>
-                        <td style="padding: 15px 10px;">
-                            <span style="background: #f1f5f9; color: #334155; padding: 4px 10px; border-radius: 8px; font-size: 12px; font-weight: 700;">{{ $gedung->lantais_count }} Lantai</span>
-                        </td>
                         <td style="padding: 15px 10px; text-align: center;">
                             <div style="display: flex; justify-content: center; gap: 8px;">
                                 <a href="{{ route('admin.biro.gedung.edit', $gedung->id) }}" style="background: #e0f2fe; color: #0369a1; text-decoration: none; padding: 6px 12px; border-radius: 8px; font-size: 12px; font-weight: 600;">Edit</a>
@@ -63,7 +59,7 @@
                         </td>
                     </tr>
                 @empty
-                    <tr><td colspan="4" style="text-align: center; padding: 30px; color: #94a3b8;">Data Gedung belum tersedia.</td></tr>
+                    <tr><td colspan="3" style="text-align: center; padding: 30px; color: #94a3b8;">Data Gedung belum tersedia.</td></tr>
                 @endforelse
             </tbody>
         </table>
