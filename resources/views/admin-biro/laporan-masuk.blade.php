@@ -670,7 +670,7 @@
                             @else
 
                                 <span class="status-badge">
-                                    {{ ucfirst($laporan->status) }}
+                                    {{ ucwords(str_replace('_', ' ', $laporan->status ?? '-')) }}
                                 </span>
 
                             @endif
