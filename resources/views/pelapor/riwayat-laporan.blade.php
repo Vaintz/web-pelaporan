@@ -1483,7 +1483,7 @@
                                                 => 'Ditolak',
 
                                             default
-                                                => ucfirst(
+                                                => ucwords(
                                                     str_replace(
                                                         '_',
                                                         ' ',
