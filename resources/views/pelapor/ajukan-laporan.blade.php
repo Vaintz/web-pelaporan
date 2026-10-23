@@ -1003,13 +1003,10 @@
                             <span class="required">*</span>
                         </label>
 
-                        <select id="lantai" name="lantai" class="form-control @error('lantai') is-invalid @enderror">
-
-                            <option value="">
-                                Pilih Lantai
-                            </option>
-
-                        </select>
+                        <input type="text" id="lantai" name="lantai"
+                            class="form-control @error('lantai') is-invalid @enderror"
+                            value="{{ old('lantai') }}" maxlength="50"
+                            placeholder="Contoh: Lantai 1">
 
                         @error('lantai')
 
@@ -1263,52 +1260,6 @@
             tambahFoto(event.dataTransfer.files);
         });
 
-        // Daftar lantai berasal dari Data Master Gedung, bukan dari data ruangan.
-        const gedungData = @json($gedungData);
-
-        const gedungSelect = document.getElementById('gedung');
-        const lantaiSelect = document.getElementById('lantai');
-        const lantaiLama = @json(old('lantai'));
-
-        function updateLantai() {
-            const gedungId = gedungSelect.value;
-            lantaiSelect.innerHTML = '<option value="">Pilih Lantai</option>';
-
-            if (!gedungId) {
-                lantaiSelect.disabled = true;
-                return;
-            }
-
-            const gedungTerpilih = gedungData.find(
-                item => String(item.id) === String(gedungId)
-            );
-
-            const daftarLantai = gedungTerpilih ? gedungTerpilih.lantais : [];
-
-            daftarLantai
-                .slice()
-                .sort((a, b) => String(a.nama).localeCompare(
-                    String(b.nama),
-                    undefined,
-                    { numeric: true }
-                ))
-                .forEach(item => {
-                    const option = document.createElement('option');
-                    option.value = item.nama;
-                    option.textContent = item.nama;
-                    option.selected = String(item.nama) === String(lantaiLama ?? '');
-                    lantaiSelect.appendChild(option);
-                });
-
-            lantaiSelect.disabled = daftarLantai.length === 0;
-
-            if (daftarLantai.length === 0) {
-                lantaiSelect.innerHTML = '<option value="">Belum ada lantai untuk gedung ini</option>';
-            }
-        }
-
-        gedungSelect.addEventListener('change', updateLantai);
-        updateLantai();
     </script>
 
 @endsection
