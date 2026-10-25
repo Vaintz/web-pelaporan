@@ -681,30 +681,132 @@
            RESPONSIVE
         ========================================= */
 
+        .mobile-menu-toggle {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            background: #ffffff;
+            color: #212035;
+            cursor: pointer;
+        }
+
+        .mobile-menu-toggle svg {
+            width: 23px;
+            height: 23px;
+        }
+
+        .sidebar-overlay {
+            display: none;
+        }
+
         @media (max-width: 768px) {
             .sidebar {
-                width: 230px;
+                width: min(280px, 85vw);
+                top: 0;
+                left: 0;
+                bottom: 0;
+                border-radius: 0 20px 20px 0;
+                transform: translateX(-110%);
+                visibility: hidden;
+                transition: transform 0.25s ease, visibility 0.25s ease;
             }
 
-            .sidebar-brand .brand-text {
-                display: none;
+            .sidebar.mobile-open {
+                transform: translateX(0);
+                visibility: visible;
             }
 
+            .sidebar-brand .brand-text,
             .sidebar-user-info {
-                display: none;
+                display: block;
             }
 
             .main-wrapper {
-                margin-left: 245px;
-                padding: 15px;
+                width: 100%;
+                min-width: 0;
+                margin-left: 0;
+                padding: 12px;
+            }
+
+            .mobile-menu-toggle {
+                display: inline-flex;
+                margin-bottom: 12px;
+                flex-shrink: 0;
+            }
+
+            .sidebar-overlay.show {
+                display: block;
+                position: fixed;
+                inset: 0;
+                background: rgba(15, 23, 42, 0.45);
+                z-index: 999;
+            }
+
+            .topbar {
+                min-height: 64px;
+                padding: 12px;
+                gap: 10px;
+                border-radius: 14px;
+                margin-bottom: 16px;
+            }
+
+            .topbar-left .page-title {
+                font-size: 16px;
+                overflow-wrap: anywhere;
+            }
+
+            .topbar-left .date-text {
+                font-size: 10px;
+            }
+
+            .topbar-right {
+                gap: 8px;
+                flex-shrink: 0;
             }
 
             .topbar-profile .text-info {
                 display: none;
             }
 
+            .topbar-avatar {
+                width: 36px;
+                height: 36px;
+            }
+
+            .profile-dropdown-btn {
+                width: 30px;
+                height: 30px;
+            }
+
+            .content {
+                width: 100%;
+                min-width: 0;
+            }
+
+            body.mobile-menu-open {
+                overflow: hidden;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .main-wrapper {
+                padding: 8px;
+            }
+
             .topbar {
-                padding: 0 15px;
+                padding: 10px;
+            }
+
+            .topbar-left .page-title {
+                font-size: 14px;
+            }
+
+            .topbar-left .date-text {
+                font-size: 9px;
             }
         }
     </style>
@@ -970,6 +1072,24 @@
 
     <div class="main-wrapper">
 
+        <button
+            type="button"
+            class="mobile-menu-toggle"
+            onclick="toggleMobileSidebar()"
+            aria-label="Buka menu"
+            aria-expanded="false"
+        >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M3 6h18M3 12h18M3 18h18"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round" />
+            </svg>
+        </button>
+
+        <div class="sidebar-overlay" onclick="closeMobileSidebar()"></div>
+
         <!-- TOPBAR -->
         <header class="topbar">
 
@@ -1118,6 +1238,39 @@
     ========================================= -->
 
     <script>
+
+        function toggleMobileSidebar() {
+            const sidebar = document.querySelector('.sidebar');
+            const overlay = document.querySelector('.sidebar-overlay');
+            const button = document.querySelector('.mobile-menu-toggle');
+
+            const isOpen = sidebar.classList.toggle('mobile-open');
+
+            overlay.classList.toggle('show', isOpen);
+            document.body.classList.toggle('mobile-menu-open', isOpen);
+
+            button.setAttribute('aria-expanded', String(isOpen));
+            button.setAttribute('aria-label', isOpen ? 'Tutup menu' : 'Buka menu');
+        }
+
+        function closeMobileSidebar() {
+            const sidebar = document.querySelector('.sidebar');
+            const overlay = document.querySelector('.sidebar-overlay');
+            const button = document.querySelector('.mobile-menu-toggle');
+
+            sidebar.classList.remove('mobile-open');
+            overlay.classList.remove('show');
+            document.body.classList.remove('mobile-menu-open');
+
+            button.setAttribute('aria-expanded', 'false');
+            button.setAttribute('aria-label', 'Buka menu');
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeMobileSidebar();
+            }
+        });
 
         // ============================
         // DROPDOWN DATA MASTER
