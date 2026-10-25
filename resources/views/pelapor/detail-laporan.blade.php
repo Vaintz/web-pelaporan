@@ -596,7 +596,7 @@
 
     }
 
-    /* Tambahan responsif untuk layar kecil */
+    /* Penyesuaian tampilan mobile */
     .detail-wrapper {
         width: 100%;
         min-width: 0;
@@ -636,12 +636,12 @@
 
     @media (max-width: 600px) {
         .detail-card {
-            padding: 14px 16px 22px;
+            padding: 12px 14px 20px;
         }
 
         .report-header {
-            gap: 12px;
-            padding-bottom: 15px;
+            gap: 10px;
+            padding-bottom: 14px;
         }
 
         .report-header > div {
@@ -649,24 +649,56 @@
             min-width: 0;
         }
 
+        .report-number {
+            margin-bottom: 4px;
+            font-size: 10px;
+        }
+
+        .report-title {
+            font-size: 16px;
+            line-height: 1.35;
+        }
+
         .status-badge {
             max-width: 100%;
             min-width: 0;
             height: auto;
-            padding: 7px 12px;
+            padding: 6px 11px;
             white-space: normal;
             line-height: 1.3;
             text-align: center;
+            font-size: 10px;
         }
 
         .detail-section {
-            padding: 18px 0;
+            padding: 16px 0;
+        }
+
+        .section-title {
+            margin-bottom: 12px;
+            font-size: 13px;
+            gap: 8px;
+        }
+
+        .section-icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        .section-icon svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .info-grid {
+            gap: 9px;
         }
 
         .info-row {
-            grid-template-columns: 105px 10px minmax(0, 1fr);
+            grid-template-columns: 100px 8px minmax(0, 1fr);
             align-items: start;
             font-size: 11px;
+            line-height: 1.45;
         }
 
         .info-label {
@@ -674,8 +706,22 @@
             overflow-wrap: anywhere;
         }
 
+        .description-label,
+        .location-label {
+            margin-bottom: 6px;
+            font-size: 11px;
+        }
+
+        .description-box {
+            min-height: 68px;
+            padding: 10px 11px;
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
         .location-grid {
             grid-template-columns: minmax(0, 1fr);
+            row-gap: 10px;
         }
 
         .location-group.full {
@@ -683,8 +729,9 @@
         }
 
         .location-value {
-            min-height: 40px;
-            padding: 9px 12px;
+            min-height: 38px;
+            padding: 8px 11px;
+            font-size: 11px;
         }
 
         .photo-grid {
@@ -693,36 +740,52 @@
 
         .photo-item {
             width: calc(50% - 5px);
-            height: 105px;
+            height: 100px;
         }
 
         .photo-overlay {
             display: none;
         }
 
+        .no-photo {
+            min-height: 68px;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .status-note {
+            margin-top: 10px;
+            padding: 9px 10px;
+            font-size: 10px;
+        }
+
+        .form-actions {
+            margin-top: 12px;
+        }
+
         .form-actions .btn {
             width: 100%;
             min-width: 0;
             min-height: 44px;
-            padding: 10px 16px;
+            padding: 10px 14px;
             text-align: center;
         }
     }
 
     @media (max-width: 360px) {
         .detail-card {
-            padding-left: 12px;
-            padding-right: 12px;
+            padding-left: 11px;
+            padding-right: 11px;
         }
 
         .info-row {
-            grid-template-columns: 88px 8px minmax(0, 1fr);
+            grid-template-columns: 88px 7px minmax(0, 1fr);
             font-size: 10px;
         }
 
         .photo-item {
             width: 100%;
-            height: 150px;
+            height: 145px;
         }
     }
 
