@@ -486,22 +486,188 @@
         }
     }
 
-    @media (max-width: 650px) {
-
-        .stats-grid {
-            grid-template-columns: 1fr;
+    @media (max-width: 768px) {
+        .dashboard-container {
+            min-height: 0;
         }
 
+        .stats-grid,
+        .dashboard-grid,
         .right-column {
-            grid-template-columns: 1fr;
+            min-width: 0;
+        }
+
+        .stats-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+
+        .stat-card {
+            min-width: 0;
+            height: auto;
+            min-height: 130px;
+            padding: 14px 10px;
+            border-radius: 15px;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-align: center;
+        }
+
+        .stat-icon {
+            width: 42px;
+            height: 42px;
+            min-width: 42px;
+        }
+
+        .stat-icon svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        .stat-content {
+            width: 100%;
+            min-width: 0;
+            flex: initial;
+            padding: 0;
+            text-align: center;
+        }
+
+        .stat-title {
+            font-size: 12px;
+            line-height: 1.25;
+            margin-bottom: 5px;
+            overflow-wrap: anywhere;
+        }
+
+        .stat-number {
+            font-size: 22px;
+            margin-bottom: 5px;
+        }
+
+        .stat-description {
+            font-size: 10px;
+            line-height: 1.3;
+        }
+
+        .dashboard-grid {
+            grid-template-columns: minmax(0, 1fr);
+            gap: 14px;
         }
 
         .chart-card {
+            width: 100%;
+            min-width: 0;
             height: auto;
+            padding: 16px 12px 12px;
+            border-radius: 15px;
+        }
+
+        .chart-header {
+            min-width: 0;
+        }
+
+        .chart-title {
+            font-size: 14px;
+            line-height: 1.35;
+        }
+
+        .chart-subtitle {
+            font-size: 11px;
+            line-height: 1.4;
         }
 
         .chart-wrapper {
-            height: 250px;
+            width: 100%;
+            height: 230px;
+            margin-top: 18px;
+        }
+
+        .right-column {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr);
+            gap: 14px;
+        }
+
+        .info-card {
+            min-width: 0;
+            padding: 16px;
+            border-radius: 15px;
+        }
+
+        .info-title {
+            font-size: 13px;
+        }
+
+        .step-title {
+            font-size: 12px;
+        }
+
+        .step-description {
+            font-size: 11px;
+            line-height: 1.45;
+        }
+
+        .guide-step {
+            gap: 10px;
+            padding-bottom: 13px;
+        }
+
+        .guide-step:not(:last-child) .step-number::after {
+            height: 27px;
+        }
+
+        .help-text {
+            font-size: 12px;
+        }
+
+        .admin-contact {
+            min-height: 58px;
+            height: auto;
+            gap: 9px;
+        }
+
+        .admin-name {
+            font-size: 11px;
+            overflow-wrap: anywhere;
+        }
+
+        .admin-email {
+            font-size: 10px;
+        }
+
+        .email-button {
+            height: 38px;
+            font-size: 12px;
+        }
+    }
+
+    @media (max-width: 380px) {
+        .stats-grid {
+            gap: 8px;
+        }
+
+        .stat-card {
+            min-height: 120px;
+            padding: 12px 7px;
+        }
+
+        .stat-title {
+            font-size: 11px;
+        }
+
+        .stat-number {
+            font-size: 20px;
+        }
+
+        .chart-wrapper {
+            height: 205px;
+        }
+
+        .info-card {
+            padding: 13px;
         }
     }
 </style>
