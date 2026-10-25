@@ -3,7 +3,30 @@
 @section('title', 'Profil Saya')
 
 @section('content')
-    <div style="max-width: 800px; display: flex; flex-direction: column; gap: 20px;">
+    <style>
+        .profil-page { width: 100%; max-width: 800px; display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+        .profil-card { background: #fff; padding: 30px; border-radius: 18px; box-shadow: 0 4px 15px rgba(0,0,0,.03); box-sizing: border-box; min-width: 0; }
+        .profil-identity { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; min-width: 0; }
+        .profil-identity-text { min-width: 0; overflow-wrap: anywhere; }
+        .profil-identity-heading { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 4px; }
+        .profil-info-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+        .profil-info-item { background: #f8fafc; padding: 16px; border-radius: 12px; border: 1px solid #f1f5f9; min-width: 0; box-sizing: border-box; }
+        .profil-info-value { display: block; font-size: 14px; color: #1e293b; font-weight: 600; overflow-wrap: anywhere; line-height: 1.5; }
+        .profil-password-input { width: 100%; max-width: 100%; box-sizing: border-box; padding: 12px 14px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 14px; }
+        @media (max-width: 600px) {
+            .profil-page { gap: 14px; }
+            .profil-card { padding: 18px 16px; border-radius: 14px; }
+            .profil-identity { gap: 14px; }
+            .profil-identity-heading h2 { font-size: 18px !important; overflow-wrap: anywhere; }
+            .profil-identity-heading span { font-size: 10px !important; }
+            .profil-info-grid { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+            .profil-info-item { padding: 13px 14px; }
+            .profil-info-item.address-item { grid-column: auto !important; }
+            .profil-info-value { font-size: 14px; }
+            .profil-password-button { width: 100%; min-height: 44px; }
+        }
+    </style>
+    <div class="profil-page">
 
         <!-- NOTIFIKASI SUKSES (OPSIONAL KALAU ADA) -->
         @if(session('success'))
@@ -12,11 +35,11 @@
             </div>
         @endif
 
-        <!-- CARD UTAMA: PROFIL (CLEAN & MODERN) -->
-        <div style="background: white; padding: 35px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); display: flex; align-items: center; justify-content: space-between; gap: 30px; flex-wrap: wrap;">
+        <!-- CARD UTAMA: PROFIL -->
+        <div class="profil-card" style="display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap;">
 
             <!-- Sisi Kiri: Foto + Identitas Singkat -->
-            <div style="display: flex; align-items: center; gap: 24px; flex-wrap: wrap;">
+            <div class="profil-identity">
                 <div style="position: relative;">
                     <div style="width: 100px; height: 100px; border-radius: 50%; overflow: hidden; background: #eef2f3; border: 3px solid #eef2f3; box-shadow: 0 4px 10px rgba(0,0,0,0.08); display: flex; justify-content: center; align-items: center;">
                         @if($user->profile_photo)
@@ -27,8 +50,8 @@
                     </div>
                 </div>
 
-                <div>
-                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 4px;">
+                <div class="profil-identity-text">
+                    <div class="profil-identity-heading">
                         <h2 style="margin: 0; color: #1a1a2e; font-size: 20px; font-weight: 700;">{{ $user->name }}</h2>
                         <span style="background: #eef2f3; color: #212035; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 700; text-transform: uppercase;">
                             {{ str_replace('_', ' ', $user->role) }}
@@ -59,17 +82,17 @@
         @endphp
 
         <!-- CARD DETAIL INFORMASI (Gaya List Bersih) -->
-        <div style="background: white; padding: 30px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
+        <div class="profil-card">
             <h3 style="margin: 0 0 20px 0; color: #1a1a2e; font-size: 16px; font-weight: 700;">Detail Informasi</h3>
 
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px;">
+            <div class="profil-info-grid">
                 
                 <!-- Identitas Utama (NIM/NIP) -->
-                <div style="background: #f8fafc; padding: 16px 20px; border-radius: 14px; border: 1px solid #f1f5f9;">
+                <div class="profil-info-item">
                     <span style="display: block; font-size: 11px; color: #64748b; font-weight: 600; text-transform: uppercase; margin-bottom: 4px;">
                         {{ $labelIdentitas }}
                     </span>
-                    <span style="font-size: 15px; color: #1e293b; font-weight: 600;">{{ $user->nim_nip ?? 'Belum diisi' }}</span>
+                    <span class="profil-info-value">{{ $user->nim_nip ?? 'Belum diisi' }}</span>
                 </div>
 
                 <!-- Nomor HP -->
@@ -97,17 +120,17 @@
                 </div>
 
                 <!-- Alamat -->
-                <div style="background: #f8fafc; padding: 16px 20px; border-radius: 14px; border: 1px solid #f1f5f9; grid-column: span 2;">
+                <div class="profil-info-item address-item">
                     <span style="display: block; font-size: 11px; color: #64748b; font-weight: 600; text-transform: uppercase; margin-bottom: 4px;">
                         Alamat 
                     </span>
-                    <span style="font-size: 15px; color: #1e293b; font-weight: 500; line-height: 1.5;">{{ $user->alamat ?? 'Belum diisi' }}</span>
+                    <span class="profil-info-value" style="font-weight: 500;">{{ $user->alamat ?? 'Belum diisi' }}</span>
                 </div>
             </div>
         </div>
 
         <!-- CARD GANTI PASSWORD -->
-        <div style="background: white; padding: 30px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
+        <div class="profil-card">
             <div style="margin-bottom: 20px;">
                 <h3 style="margin: 0 0 4px 0; color: #1a1a2e; font-size: 16px; font-weight: 700;">Keamanan & Password</h3>
                 <p style="margin: 0; color: #64748b; font-size: 13px;">Pastikan menggunakan password yang kuat dan mudah diingat.</p>
@@ -135,7 +158,7 @@
 
                 <div style="margin-bottom: 16px;">
                     <label style="display: block; font-size: 12px; font-weight: 600; color: #334155; margin-bottom: 6px;">Password Lama</label>
-                    <input type="password" name="current_password" style="width: 100%; padding: 12px 14px; border: 1px solid #cbd5e1; border-radius: 12px; font-size: 14px; outline: none;" placeholder="Masukkan password saat ini" required>
+                    <input type="password" name="current_password" class="profil-password-input" placeholder="Masukkan password saat ini" required>
                 </div>
 
                 <div style="margin-bottom: 16px;">
@@ -148,7 +171,7 @@
                     <input type="password" name="password_confirmation" style="width: 100%; padding: 12px 14px; border: 1px solid #cbd5e1; border-radius: 12px; font-size: 14px; outline: none;" placeholder="Ulangi password baru" required>
                 </div>
 
-                <button type="submit" style="background: #334155; color: white; border: none; padding: 12px 24px; border-radius: 12px; font-weight: 600; cursor: pointer; font-size: 13px; transition: 0.2s;">
+                <button type="submit" class="profil-password-button" style="background: #334155; color: white; border: none; padding: 12px 24px; border-radius: 12px; font-weight: 600; cursor: pointer; font-size: 13px; transition: 0.2s;">
                     Perbarui Password
                 </button>
             </form>
