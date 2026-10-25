@@ -987,29 +987,71 @@
 
     .table-footer {
         height: auto;
-        padding: 14px 10px;
+        min-height: 0;
+        padding: 16px 12px;
+        display: flex;
         flex-direction: column;
+        align-items: center;
+        justify-content: center;
         gap: 14px;
     }
 
-    .pagination {
+    .table-footer .pagination {
         position: static;
+        inset: auto;
         transform: none;
+        order: 1;
+        width: 100%;
         max-width: 100%;
+        display: flex;
         flex-wrap: wrap;
+        align-items: center;
         justify-content: center;
+        gap: 6px;
+        margin: 0;
     }
 
     .pagination a,
     .pagination span {
+        box-sizing: border-box;
         width: 34px;
+        min-width: 34px;
+        height: 34px;
+        margin: 0;
+    }
+
+    .table-footer .per-page {
+        order: 2;
+        width: 100%;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        white-space: nowrap;
+    }
+
+    .table-footer .per-page form {
+        margin: 0;
+        flex: 0 0 auto;
+    }
+
+    .per-page-select,
+    .per-page select {
         height: 34px;
     }
 
-    .per-page {
-        margin-left: 0;
-        justify-content: center;
-        white-space: normal;
+    .per-page-select {
+        width: 54px;
+        flex: 0 0 54px;
+    }
+
+    .per-page select {
+        box-sizing: border-box;
+    }
+
+    .per-page-icon {
+        right: 5px;
     }
 
     .empty-state {
