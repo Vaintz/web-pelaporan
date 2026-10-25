@@ -595,6 +595,137 @@
         }
 
     }
+
+    /* Tambahan responsif untuk layar kecil */
+    .detail-wrapper {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .detail-card,
+    .report-header,
+    .detail-section,
+    .info-grid,
+    .location-grid {
+        min-width: 0;
+        max-width: 100%;
+    }
+
+    .report-title,
+    .info-value,
+    .location-value,
+    .description-box,
+    .status-note {
+        overflow-wrap: anywhere;
+        word-break: break-word;
+    }
+
+    @media (max-width: 800px) {
+        .info-grid {
+            grid-template-columns: minmax(0, 1fr);
+        }
+
+        .location-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .location-group.full {
+            grid-column: 1 / -1;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .detail-card {
+            padding: 14px 16px 22px;
+        }
+
+        .report-header {
+            gap: 12px;
+            padding-bottom: 15px;
+        }
+
+        .report-header > div {
+            width: 100%;
+            min-width: 0;
+        }
+
+        .status-badge {
+            max-width: 100%;
+            min-width: 0;
+            height: auto;
+            padding: 7px 12px;
+            white-space: normal;
+            line-height: 1.3;
+            text-align: center;
+        }
+
+        .detail-section {
+            padding: 18px 0;
+        }
+
+        .info-row {
+            grid-template-columns: 105px 10px minmax(0, 1fr);
+            align-items: start;
+            font-size: 11px;
+        }
+
+        .info-label {
+            white-space: normal;
+            overflow-wrap: anywhere;
+        }
+
+        .location-grid {
+            grid-template-columns: minmax(0, 1fr);
+        }
+
+        .location-group.full {
+            grid-column: auto;
+        }
+
+        .location-value {
+            min-height: 40px;
+            padding: 9px 12px;
+        }
+
+        .photo-grid {
+            gap: 10px;
+        }
+
+        .photo-item {
+            width: calc(50% - 5px);
+            height: 105px;
+        }
+
+        .photo-overlay {
+            display: none;
+        }
+
+        .form-actions .btn {
+            width: 100%;
+            min-width: 0;
+            min-height: 44px;
+            padding: 10px 16px;
+            text-align: center;
+        }
+    }
+
+    @media (max-width: 360px) {
+        .detail-card {
+            padding-left: 12px;
+            padding-right: 12px;
+        }
+
+        .info-row {
+            grid-template-columns: 88px 8px minmax(0, 1fr);
+            font-size: 10px;
+        }
+
+        .photo-item {
+            width: 100%;
+            height: 150px;
+        }
+    }
+
 </style>
 
 
