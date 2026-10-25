@@ -6,7 +6,7 @@
     <style>
         .profil-edit-page { width: 100%; max-width: 800px; display: flex; flex-direction: column; gap: 20px; min-width: 0; }
         .profil-edit-card { background: #fff; padding: 30px; border-radius: 18px; box-shadow: 0 4px 15px rgba(0,0,0,.03); box-sizing: border-box; min-width: 0; }
-        .profil-edit-fields { display: flex; flex-direction: column; gap: 24px; min-width: 0; }
+        .profil-edit-fields { display: flex; flex-direction: column; gap: 18px; min-width: 0; }
         .profil-edit-inputs { flex: 1 1 auto; width: 100%; min-width: 0; display: flex; flex-direction: column; gap: 16px; }
         .profil-edit-photo { flex: 0 0 260px; width: 260px; min-width: 0; display: flex; flex-direction: column; align-items: flex-start; text-align: left; }
         .profil-edit-input { width: 100%; max-width: 100%; box-sizing: border-box; padding: 12px 14px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 14px; }
@@ -23,11 +23,14 @@
         .profil-edit-photo label { align-self: flex-start; text-align: left; }
         .profil-edit-upload-controls input[type="file"] { width: 100%; max-width: 100%; font-size: 11px; }
         .profil-edit-upload-controls > span { display: block; font-size: 10px !important; line-height: 1.4; }
-        .profil-edit-actions { margin-top: 28px; border-top: 1px solid #f1f5f9; padding-top: 18px; display: flex; justify-content: flex-end; align-items: center; gap: 12px; }
+        .profil-edit-actions { margin-top: 18px; border-top: 1px solid #f1f5f9; padding-top: 16px; display: flex; justify-content: flex-end; align-items: center; gap: 12px; }
         @media (max-width: 600px) {
             .profil-edit-page { gap: 14px; }
             .profil-edit-card { padding: 18px 16px; border-radius: 14px; }
-            .profil-edit-fields { flex-direction: column; gap: 20px; }
+            .profil-edit-fields { flex-direction: column; gap: 16px; }
+            .profil-edit-card form { display: block; height: auto; min-height: 0; }
+            .profil-edit-card form > .profil-edit-fields { height: auto; flex: 0 0 auto; }
+            .profil-edit-card form > .profil-edit-actions { margin-top: 18px; }
             .profil-edit-inputs { flex: 1 1 auto; width: 100%; min-width: 0; }
             .profil-edit-photo { flex: 0 0 260px; width: 260px !important; padding-top: 0; align-items: flex-start; }
             .profil-edit-upload-row { align-items: center; gap: 10px; }
@@ -36,7 +39,7 @@
             .profil-edit-upload-controls input[type="file"]::file-selector-button { max-width: 100%; font-size: 10px; padding: 5px 4px; }
             .profil-edit-photo label { font-size: 11px !important; }
             .profil-edit-upload-controls > span { font-size: 9px !important; }
-            .profil-edit-actions { margin-top: 22px; padding-top: 16px; gap: 8px; }
+            .profil-edit-actions { margin-top: 16px; padding-top: 14px; gap: 8px; }
             .profil-edit-actions a { display: flex; align-items: center; justify-content: center; }
             .profil-edit-actions { flex-direction: column-reverse; align-items: stretch; }
             .profil-edit-actions a, .profil-edit-actions button { width: 100%; min-height: 44px; box-sizing: border-box; text-align: center; }
