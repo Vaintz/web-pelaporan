@@ -11,21 +11,29 @@
         .profil-edit-photo { flex: 0 1 220px; min-width: 0; display: flex; flex-direction: column; align-items: center; text-align: center; }
         .profil-edit-input { width: 100%; max-width: 100%; box-sizing: border-box; padding: 12px 14px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 14px; }
         .profil-edit-input:disabled { background: #f8fafc; color: #94a3b8; border-color: #e2e8f0; }
-        .profil-edit-avatar { width: 110px; height: 110px; border-radius: 50%; overflow: hidden; background: #eef2f3; border: 3px solid #eef2f3; box-shadow: 0 4px 10px rgba(0,0,0,.08); display: flex; justify-content: center; align-items: center; margin-bottom: 14px; box-sizing: border-box; }
+        .profil-edit-photo { flex: 0 0 260px; width: 260px; }
+        .profil-edit-photo-head { display: flex; align-items: center; gap: 14px; width: 100%; margin-bottom: 14px; text-align: left; }
+        .profil-edit-avatar { width: 72px; height: 72px; flex: 0 0 72px; border-radius: 50%; overflow: hidden; background: #eef2f3; border: 3px solid #eef2f3; box-shadow: 0 4px 10px rgba(0,0,0,.08); display: flex; justify-content: center; align-items: center; box-sizing: border-box; }
         .profil-edit-avatar img { width: 100%; height: 100%; object-fit: cover; }
+        .profil-edit-photo-identity { min-width: 0; overflow-wrap: anywhere; }
+        .profil-edit-photo-identity strong { display: block; color: #1a1a2e; font-size: 14px; line-height: 1.35; margin-bottom: 5px; }
+        .profil-edit-role { display: inline-block; background: #eef2f3; color: #212035; padding: 3px 8px; border-radius: 10px; font-size: 10px; font-weight: 700; text-transform: uppercase; margin-bottom: 5px; }
+        .profil-edit-email { display: block; color: #64748b; font-size: 11px; line-height: 1.4; overflow-wrap: anywhere; }
+        .profil-edit-photo label { align-self: flex-start; text-align: left; }
         .profil-edit-actions { margin-top: 28px; border-top: 1px solid #f1f5f9; padding-top: 18px; display: flex; justify-content: flex-end; align-items: center; gap: 12px; }
         @media (max-width: 600px) {
             .profil-edit-page { gap: 14px; }
             .profil-edit-card { padding: 18px 16px; border-radius: 14px; }
             .profil-edit-fields { flex-direction: row; flex-wrap: nowrap; align-items: flex-start; gap: 12px; }
             .profil-edit-inputs { flex: 1 1 0; width: auto; min-width: 0; }
-            .profil-edit-photo { flex: 0 0 96px; width: 96px !important; padding-top: 4px; }
-            .profil-edit-avatar { width: 72px; height: 72px; margin-bottom: 10px; }
-            .profil-edit-photo input[type="file"] { width: 100%; max-width: 100%; font-size: 10px; }
-            .profil-edit-photo input[type="file"]::file-selector-button { max-width: 100%; font-size: 10px; padding: 5px 4px; }
-            .profil-edit-photo > label { font-size: 11px !important; }
-            .profil-edit-photo > span { font-size: 10px !important; }
-            .profil-edit-photo > span { display: block; line-height: 1.5; }
+            .profil-edit-photo { flex: 0 0 100%; width: 100% !important; padding-top: 4px; align-items: stretch; }
+            .profil-edit-photo-head { gap: 12px; margin-bottom: 12px; }
+            .profil-edit-avatar { width: 64px; height: 64px; flex-basis: 64px; }
+            .profil-edit-photo-identity strong { font-size: 13px; }
+            .profil-edit-photo input[type="file"] { width: 100%; max-width: 100%; font-size: 11px; }
+            .profil-edit-photo input[type="file"]::file-selector-button { max-width: 100%; font-size: 11px; padding: 6px 8px; }
+            .profil-edit-photo label { font-size: 11px !important; }
+            .profil-edit-photo > span { display: block; line-height: 1.5; font-size: 10px !important; }
             .profil-edit-actions { margin-top: 22px; padding-top: 16px; gap: 8px; }
             .profil-edit-actions a { display: flex; align-items: center; justify-content: center; }
             .profil-edit-actions { flex-direction: column-reverse; align-items: stretch; }
@@ -126,16 +134,22 @@
 
                     <!-- Bagian Kanan: Foto Profil -->
                     <div class="profil-edit-photo">
-                        <label style="display: block; font-size: 12px; font-weight: 600; color: #334155; margin-bottom: 12px;">Foto Profil</label>
-
-                        <div class="profil-edit-avatar">
-                            @if($user->profile_photo)
-                                <img src="{{ asset('storage/' . $user->profile_photo) }}" alt="Foto profil">
-                            @else
-                                <span style="color: #888; font-size: 14px; font-weight: 600;">{{ strtoupper(substr($user->name, 0, 2)) }}</span>
-                            @endif
+                        <div class="profil-edit-photo-head">
+                            <div class="profil-edit-avatar">
+                                @if($user->profile_photo)
+                                    <img src="{{ asset('storage/' . $user->profile_photo) }}" alt="Foto profil">
+                                @else
+                                    <span style="color: #888; font-size: 14px; font-weight: 600;">{{ strtoupper(substr($user->name, 0, 2)) }}</span>
+                                @endif
+                            </div>
+                            <div class="profil-edit-photo-identity">
+                                <strong>{{ $user->name }}</strong>
+                                <span class="profil-edit-role">{{ str_replace('_', ' ', $user->role) }}</span>
+                                <span class="profil-edit-email">{{ $user->email }}</span>
+                            </div>
                         </div>
 
+                        <label style="display: block; font-size: 12px; font-weight: 600; color: #334155; margin-bottom: 8px;">Ganti Foto Profil</label>
                         <input type="file" name="profile_photo" accept="image/*" style="width: 100%; font-size: 12px; color: #64748b;">
                         <span style="font-size: 11px; color: #94a3b8; margin-top: 6px;">Format JPG/PNG, maks. 5MB</span>
                     </div>
