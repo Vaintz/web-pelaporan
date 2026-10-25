@@ -7,6 +7,10 @@
         .profil-page { width: 100%; max-width: 800px; display: flex; flex-direction: column; gap: 20px; min-width: 0; }
         .profil-card { background: #fff; padding: 30px; border-radius: 18px; box-shadow: 0 4px 15px rgba(0,0,0,.03); box-sizing: border-box; min-width: 0; }
         .profil-identity { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; min-width: 0; }
+        .profil-hero { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+        .profil-avatar { width: 100px; height: 100px; flex: 0 0 100px; border-radius: 50%; overflow: hidden; background: #eef2f3; border: 3px solid #eef2f3; box-shadow: 0 4px 10px rgba(0,0,0,.08); display: flex; justify-content: center; align-items: center; box-sizing: border-box; }
+        .profil-avatar img { width: 100%; height: 100%; object-fit: cover; }
+        .profil-edit-link { background: #212035; color: #fff; text-decoration: none; padding: 10px 22px; border-radius: 10px; font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; white-space: nowrap; box-shadow: 0 4px 10px rgba(33,32,53,.15); }
         .profil-identity-text { min-width: 0; overflow-wrap: anywhere; }
         .profil-identity-heading { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 4px; }
         .profil-info-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
@@ -16,7 +20,12 @@
         @media (max-width: 600px) {
             .profil-page { gap: 14px; }
             .profil-card { padding: 18px 16px; border-radius: 14px; }
-            .profil-identity { gap: 14px; }
+            .profil-hero { padding: 18px 16px; gap: 14px; align-items: stretch; }
+            .profil-identity { width: 100%; gap: 12px; flex-wrap: nowrap; align-items: center; }
+            .profil-avatar { width: 64px; height: 64px; flex-basis: 64px; border-width: 2px; }
+            .profil-identity-text { flex: 1; }
+            .profil-identity-heading { gap: 6px; }
+            .profil-edit-link { width: 100%; box-sizing: border-box; min-height: 42px; }
             .profil-identity-heading h2 { font-size: 18px !important; overflow-wrap: anywhere; }
             .profil-identity-heading span { font-size: 10px !important; }
             .profil-info-grid { grid-template-columns: minmax(0, 1fr); gap: 10px; }
@@ -36,14 +45,14 @@
         @endif
 
         <!-- CARD UTAMA: PROFIL -->
-        <div class="profil-card" style="display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap;">
+        <div class="profil-card profil-hero">
 
             <!-- Sisi Kiri: Foto + Identitas Singkat -->
             <div class="profil-identity">
                 <div style="position: relative;">
-                    <div style="width: 100px; height: 100px; border-radius: 50%; overflow: hidden; background: #eef2f3; border: 3px solid #eef2f3; box-shadow: 0 4px 10px rgba(0,0,0,0.08); display: flex; justify-content: center; align-items: center;">
+                    <div class="profil-avatar">
                         @if($user->profile_photo)
-                            <img src="{{ asset('storage/' . $user->profile_photo) }}" style="width: 100%; height: 100%; object-fit: cover;">
+                            <img src="{{ asset('storage/' . $user->profile_photo) }}" alt="Foto profil">
                         @else
                             <span style="color: #888; font-size: 13px; font-weight: 600;">{{ strtoupper(substr($user->name, 0, 2)) }}</span>
                         @endif
@@ -63,7 +72,7 @@
 
             <!-- Sisi Kanan: Tombol Edit -->
             <div>
-                <a href="{{ route('profil.edit') }}" style="background: #212035; color: white; text-decoration: none; padding: 10px 22px; border-radius: 12px; font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; transition: 0.2s; box-shadow: 0 4px 10px rgba(33,32,53,0.15);">
+                <a href="{{ route('profil.edit') }}" class="profil-edit-link">
                     Edit Profil
                 </a>
             </div>
