@@ -39,7 +39,6 @@
             display: flex;
             flex-direction: column;
 
-            box-shadow: 4px 0 20px rgba(0, 0, 0, 0.05);
 
             z-index: 1000;
             overflow: hidden;
