@@ -134,19 +134,12 @@
 
                     <!-- Bagian Kanan: Foto Profil -->
                     <div class="profil-edit-photo">
-                        <div class="profil-edit-photo-head">
-                            <div class="profil-edit-avatar">
-                                @if($user->profile_photo)
-                                    <img src="{{ asset('storage/' . $user->profile_photo) }}" alt="Foto profil">
-                                @else
-                                    <span style="color: #888; font-size: 14px; font-weight: 600;">{{ strtoupper(substr($user->name, 0, 2)) }}</span>
-                                @endif
-                            </div>
-                            <div class="profil-edit-photo-identity">
-                                <strong>{{ $user->name }}</strong>
-                                <span class="profil-edit-role">{{ str_replace('_', ' ', $user->role) }}</span>
-                                <span class="profil-edit-email">{{ $user->email }}</span>
-                            </div>
+                        <div class="profil-edit-avatar">
+                            @if($user->profile_photo)
+                                <img src="{{ asset('storage/' . $user->profile_photo) }}" alt="Foto profil">
+                            @else
+                                <span style="color: #888; font-size: 14px; font-weight: 600;">{{ strtoupper(substr($user->name, 0, 2)) }}</span>
+                            @endif
                         </div>
 
                         <label style="display: block; font-size: 12px; font-weight: 600; color: #334155; margin-bottom: 8px;">Ganti Foto Profil</label>
