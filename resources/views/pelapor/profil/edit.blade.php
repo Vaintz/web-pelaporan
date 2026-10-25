@@ -17,11 +17,14 @@
         @media (max-width: 600px) {
             .profil-edit-page { gap: 14px; }
             .profil-edit-card { padding: 18px 16px; border-radius: 14px; }
-            .profil-edit-fields { flex-direction: column; gap: 24px; }
-            .profil-edit-inputs { flex-basis: auto; width: 100%; }
-            .profil-edit-photo { width: 100% !important; flex-basis: auto; padding-top: 4px; }
-            .profil-edit-avatar { width: 88px; height: 88px; margin-bottom: 12px; }
-            .profil-edit-photo input[type="file"] { width: 100%; max-width: 100%; font-size: 12px; }
+            .profil-edit-fields { flex-direction: row; flex-wrap: nowrap; align-items: flex-start; gap: 12px; }
+            .profil-edit-inputs { flex: 1 1 0; width: auto; min-width: 0; }
+            .profil-edit-photo { flex: 0 0 96px; width: 96px !important; padding-top: 4px; }
+            .profil-edit-avatar { width: 72px; height: 72px; margin-bottom: 10px; }
+            .profil-edit-photo input[type="file"] { width: 100%; max-width: 100%; font-size: 10px; }
+            .profil-edit-photo input[type="file"]::file-selector-button { max-width: 100%; font-size: 10px; padding: 5px 4px; }
+            .profil-edit-photo > label { font-size: 11px !important; }
+            .profil-edit-photo > span { font-size: 10px !important; }
             .profil-edit-photo > span { display: block; line-height: 1.5; }
             .profil-edit-actions { margin-top: 22px; padding-top: 16px; gap: 8px; }
             .profil-edit-actions a { display: flex; align-items: center; justify-content: center; }
