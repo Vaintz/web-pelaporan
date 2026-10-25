@@ -685,8 +685,9 @@
             display: none;
             align-items: center;
             justify-content: center;
-            width: 42px;
-            height: 42px;
+            width: 40px;
+            height: 40px;
+            flex: 0 0 40px;
             border: 1px solid #e2e8f0;
             border-radius: 12px;
             background: #ffffff;
@@ -695,8 +696,8 @@
         }
 
         .mobile-menu-toggle svg {
-            width: 23px;
-            height: 23px;
+            width: 22px;
+            height: 22px;
         }
 
         .sidebar-overlay {
@@ -704,15 +705,23 @@
         }
 
         @media (max-width: 768px) {
+            body {
+                display: block;
+                width: 100%;
+                overflow-x: hidden;
+            }
+
             .sidebar {
-                width: min(280px, 85vw);
+                width: min(290px, 86vw);
                 top: 0;
                 left: 0;
                 bottom: 0;
-                border-radius: 0 20px 20px 0;
-                transform: translateX(-110%);
+                height: 100dvh;
+                border-radius: 0 18px 18px 0;
+                transform: translateX(-105%);
                 visibility: hidden;
                 transition: transform 0.25s ease, visibility 0.25s ease;
+                z-index: 1100;
             }
 
             .sidebar.mobile-open {
@@ -726,46 +735,56 @@
             }
 
             .main-wrapper {
+                display: block;
                 width: 100%;
                 min-width: 0;
-                margin-left: 0;
-                padding: 12px;
+                margin: 0;
+                padding: 10px;
+            }
+
+            .topbar {
+                width: 100%;
+                min-height: 62px;
+                padding: 10px;
+                gap: 10px;
+                border-radius: 14px;
+                margin-bottom: 14px;
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
             }
 
             .mobile-menu-toggle {
                 display: inline-flex;
-                margin-bottom: 12px;
-                flex-shrink: 0;
             }
 
-            .sidebar-overlay.show {
-                display: block;
-                position: fixed;
-                inset: 0;
-                background: rgba(15, 23, 42, 0.45);
-                z-index: 999;
+            .topbar-left {
+                flex: 1 1 auto;
+                min-width: 0;
             }
 
-            .topbar {
-                min-height: 64px;
-                padding: 12px;
-                gap: 10px;
-                border-radius: 14px;
-                margin-bottom: 16px;
+            .topbar-left > div {
+                min-width: 0;
             }
 
             .topbar-left .page-title {
-                font-size: 16px;
+                font-size: 15px;
+                line-height: 1.25;
                 overflow-wrap: anywhere;
             }
 
             .topbar-left .date-text {
                 font-size: 10px;
+                line-height: 1.3;
             }
 
             .topbar-right {
-                gap: 8px;
-                flex-shrink: 0;
+                gap: 6px;
+                flex: 0 0 auto;
+            }
+
+            .topbar-profile {
+                gap: 0;
             }
 
             .topbar-profile .text-info {
@@ -773,18 +792,34 @@
             }
 
             .topbar-avatar {
-                width: 36px;
-                height: 36px;
+                width: 34px;
+                height: 34px;
             }
 
             .profile-dropdown-btn {
                 width: 30px;
                 height: 30px;
+                flex: 0 0 30px;
+            }
+
+            .profile-menu {
+                top: calc(100% + 8px);
+                right: 0;
+                max-width: calc(100vw - 24px);
+            }
+
+            .sidebar-overlay.show {
+                display: block;
+                position: fixed;
+                inset: 0;
+                background: rgba(15, 23, 42, 0.48);
+                z-index: 1090;
             }
 
             .content {
                 width: 100%;
                 min-width: 0;
+                overflow-wrap: anywhere;
             }
 
             body.mobile-menu-open {
@@ -798,17 +833,36 @@
             }
 
             .topbar {
-                padding: 10px;
+                padding: 8px;
+                gap: 7px;
+            }
+
+            .mobile-menu-toggle {
+                width: 36px;
+                height: 36px;
+                flex-basis: 36px;
             }
 
             .topbar-left .page-title {
-                font-size: 14px;
+                font-size: 13px;
             }
 
             .topbar-left .date-text {
                 font-size: 9px;
             }
+
+            .topbar-avatar {
+                width: 30px;
+                height: 30px;
+            }
+
+            .profile-dropdown-btn {
+                width: 26px;
+                height: 26px;
+                flex-basis: 26px;
+            }
         }
+
     </style>
 </head>
 
@@ -1072,26 +1126,26 @@
 
     <div class="main-wrapper">
 
-        <button
-            type="button"
-            class="mobile-menu-toggle"
-            onclick="toggleMobileSidebar()"
-            aria-label="Buka menu"
-            aria-expanded="false"
-        >
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M3 6h18M3 12h18M3 18h18"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round" />
-            </svg>
-        </button>
-
         <div class="sidebar-overlay" onclick="closeMobileSidebar()"></div>
 
         <!-- TOPBAR -->
         <header class="topbar">
+
+            <button
+                type="button"
+                class="mobile-menu-toggle"
+                onclick="toggleMobileSidebar()"
+                aria-label="Buka menu"
+                aria-expanded="false"
+            >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M3 6h18M3 12h18M3 18h18"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round" />
+                </svg>
+            </button>
 
             <!-- KIRI -->
             <div class="topbar-left">
@@ -1270,6 +1324,10 @@
             if (event.key === 'Escape') {
                 closeMobileSidebar();
             }
+        });
+
+        document.querySelectorAll('.sidebar a').forEach(function(link) {
+            link.addEventListener('click', closeMobileSidebar);
         });
 
         // ============================
