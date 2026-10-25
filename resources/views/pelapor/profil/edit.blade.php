@@ -6,12 +6,12 @@
     <style>
         .profil-edit-page { width: 100%; max-width: 800px; display: flex; flex-direction: column; gap: 20px; min-width: 0; }
         .profil-edit-card { background: #fff; padding: 30px; border-radius: 18px; box-shadow: 0 4px 15px rgba(0,0,0,.03); box-sizing: border-box; min-width: 0; }
-        .profil-edit-fields { display: flex; gap: 28px; flex-wrap: wrap; min-width: 0; }
-        .profil-edit-inputs { flex: 1 1 300px; min-width: 0; display: flex; flex-direction: column; gap: 16px; }
+        .profil-edit-fields { display: flex; flex-direction: column; gap: 24px; min-width: 0; }
+        .profil-edit-inputs { flex: 1 1 auto; width: 100%; min-width: 0; display: flex; flex-direction: column; gap: 16px; }
         .profil-edit-photo { flex: 0 1 220px; min-width: 0; display: flex; flex-direction: column; align-items: center; text-align: center; }
         .profil-edit-input { width: 100%; max-width: 100%; box-sizing: border-box; padding: 12px 14px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 14px; }
         .profil-edit-input:disabled { background: #f8fafc; color: #94a3b8; border-color: #e2e8f0; }
-        .profil-edit-photo { flex: 0 0 260px; width: 260px; }
+        .profil-edit-photo { flex: 0 0 auto; width: 100%; min-width: 0; align-items: stretch; text-align: left; padding-bottom: 18px; border-bottom: 1px solid #f1f5f9; }
         .profil-edit-photo-head { display: flex; align-items: center; gap: 14px; width: 100%; margin-bottom: 14px; text-align: left; }
         .profil-edit-avatar { width: 72px; height: 72px; flex: 0 0 72px; border-radius: 50%; overflow: hidden; background: #eef2f3; border: 3px solid #eef2f3; box-shadow: 0 4px 10px rgba(0,0,0,.08); display: flex; justify-content: center; align-items: center; box-sizing: border-box; }
         .profil-edit-avatar img { width: 100%; height: 100%; object-fit: cover; }
@@ -24,10 +24,10 @@
         @media (max-width: 600px) {
             .profil-edit-page { gap: 14px; }
             .profil-edit-card { padding: 18px 16px; border-radius: 14px; }
-            .profil-edit-fields { flex-direction: row; flex-wrap: nowrap; align-items: flex-start; gap: 12px; }
-            .profil-edit-inputs { flex: 1 1 0; width: auto; min-width: 0; }
-            .profil-edit-photo { flex: 0 0 100%; width: 100% !important; padding-top: 4px; align-items: stretch; }
-            .profil-edit-photo-head { gap: 12px; margin-bottom: 12px; }
+            .profil-edit-fields { flex-direction: column; gap: 20px; }
+            .profil-edit-inputs { flex: 1 1 auto; width: 100%; min-width: 0; }
+            .profil-edit-photo { flex: 0 0 auto; width: 100% !important; padding-top: 0; align-items: stretch; }
+            .profil-edit-photo-head { gap: 12px; margin-bottom: 14px; }
             .profil-edit-avatar { width: 64px; height: 64px; flex-basis: 64px; }
             .profil-edit-photo-identity strong { font-size: 13px; }
             .profil-edit-photo input[type="file"] { width: 100%; max-width: 100%; font-size: 11px; }
