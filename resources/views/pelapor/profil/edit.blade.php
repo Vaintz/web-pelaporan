@@ -11,13 +11,20 @@
         .profil-edit-photo { flex: 0 1 220px; min-width: 0; display: flex; flex-direction: column; align-items: center; text-align: center; }
         .profil-edit-input { width: 100%; max-width: 100%; box-sizing: border-box; padding: 12px 14px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 14px; }
         .profil-edit-input:disabled { background: #f8fafc; color: #94a3b8; border-color: #e2e8f0; }
+        .profil-edit-avatar { width: 110px; height: 110px; border-radius: 50%; overflow: hidden; background: #eef2f3; border: 3px solid #eef2f3; box-shadow: 0 4px 10px rgba(0,0,0,.08); display: flex; justify-content: center; align-items: center; margin-bottom: 14px; box-sizing: border-box; }
+        .profil-edit-avatar img { width: 100%; height: 100%; object-fit: cover; }
         .profil-edit-actions { margin-top: 28px; border-top: 1px solid #f1f5f9; padding-top: 18px; display: flex; justify-content: flex-end; align-items: center; gap: 12px; }
         @media (max-width: 600px) {
             .profil-edit-page { gap: 14px; }
             .profil-edit-card { padding: 18px 16px; border-radius: 14px; }
             .profil-edit-fields { flex-direction: column; gap: 24px; }
             .profil-edit-inputs { flex-basis: auto; width: 100%; }
-            .profil-edit-photo { width: 100% !important; flex-basis: auto; }
+            .profil-edit-photo { width: 100% !important; flex-basis: auto; padding-top: 4px; }
+            .profil-edit-avatar { width: 88px; height: 88px; margin-bottom: 12px; }
+            .profil-edit-photo input[type="file"] { width: 100%; max-width: 100%; font-size: 12px; }
+            .profil-edit-photo > span { display: block; line-height: 1.5; }
+            .profil-edit-actions { margin-top: 22px; padding-top: 16px; gap: 8px; }
+            .profil-edit-actions a { display: flex; align-items: center; justify-content: center; }
             .profil-edit-actions { flex-direction: column-reverse; align-items: stretch; }
             .profil-edit-actions a, .profil-edit-actions button { width: 100%; min-height: 44px; box-sizing: border-box; text-align: center; }
         }
@@ -118,9 +125,9 @@
                     <div class="profil-edit-photo">
                         <label style="display: block; font-size: 12px; font-weight: 600; color: #334155; margin-bottom: 12px;">Foto Profil</label>
 
-                        <div style="width: 110px; height: 110px; border-radius: 50%; overflow: hidden; background: #eef2f3; border: 3px solid #eef2f3; box-shadow: 0 4px 10px rgba(0,0,0,0.08); display: flex; justify-content: center; align-items: center; margin-bottom: 14px;">
+                        <div class="profil-edit-avatar">
                             @if($user->profile_photo)
-                                <img src="{{ asset('storage/' . $user->profile_photo) }}" style="width: 100%; height: 100%; object-fit: cover;">
+                                <img src="{{ asset('storage/' . $user->profile_photo) }}" alt="Foto profil">
                             @else
                                 <span style="color: #888; font-size: 14px; font-weight: 600;">{{ strtoupper(substr($user->name, 0, 2)) }}</span>
                             @endif
