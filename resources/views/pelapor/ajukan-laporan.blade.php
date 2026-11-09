@@ -1054,7 +1054,7 @@
 
                         <input type="text" name="detail_lokasi"
                             class="form-control @error('detail_lokasi') is-invalid @enderror"
-                            placeholder="Contoh: AC bagian depan ruangan, dekat jendela, dll."
+                            placeholder="Contoh: Gedung, lantai, nomor ruangan, dan detail lokasi lainnya."
                             value="{{ old('detail_lokasi') }}">
 
                         @error('detail_lokasi')
