@@ -19,6 +19,14 @@ use App\Http\Controllers\KategoriKerusakanController;
 use App\Http\Controllers\TeknisiController;
 
 // ====================
+// REGISTRASI PELAPOR
+// ====================
+
+Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
+Route::post('/register', [AuthController::class, 'register'])->name('register.process');
+
+
+// ====================
 // LOGIN
 // ====================
 
