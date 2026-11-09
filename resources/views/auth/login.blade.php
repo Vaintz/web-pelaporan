@@ -609,14 +609,17 @@
             </form>
 
 
+            <!-- REGISTRASI -->
+            <div class="forgot-password" style="text-align: center; margin-top: 18px;">
+                Belum punya akun?
+                <a href="{{ route('register') }}">Daftar di sini</a>
+            </div>
+
             <!-- LUPA PASSWORD -->
-
             <div class="forgot-password">
-
                 <a href="{{ route('password.request') }}">
                     Lupa Password?
                 </a>
-
             </div>
 
 
