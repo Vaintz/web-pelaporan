@@ -19,6 +19,8 @@ class Laporan extends Model
         'detail_lokasi',
         'status',
         'catatan_verifikasi',
+        'tanggal_pengecekan',
+        'foto_pengecekan',
 
         // Verifikasi Admin Biro
         'prioritas',
@@ -37,6 +39,7 @@ class Laporan extends Model
         'diverifikasi_biro_at' => 'datetime',
         'tanggal_penugasan' => 'date',
         'target_selesai' => 'date',
+        'tanggal_pengecekan' => 'date',
     ];
 
     public function user()
