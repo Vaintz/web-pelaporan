@@ -453,6 +453,29 @@
 
 
     /* =========================================================
+       HASIL PENGECEKAN
+    ========================================================= */
+
+    .verification-result-grid {
+        display: grid;
+        grid-template-columns: minmax(220px, 1fr) minmax(220px, 1fr);
+        align-items: start;
+        gap: 24px;
+    }
+
+    .verification-photo-block {
+        min-width: 0;
+    }
+
+    @media (max-width: 600px) {
+        .verification-result-grid {
+            grid-template-columns: 1fr;
+            gap: 18px;
+        }
+    }
+
+
+    /* =========================================================
        STATUS NOTE
     ========================================================= */
 
@@ -1199,61 +1222,67 @@
 
             </div>
 
-            <div class="info-grid">
+            <div class="verification-result-grid">
 
-                <div class="info-row">
+                <div>
+                    <div class="info-row">
 
-                    <span class="info-label">
-                        Tanggal Pengecekan
-                    </span>
+                        <span class="info-label">
+                            Tanggal Pengecekan
+                        </span>
 
-                    <span class="info-separator">
-                        :
-                    </span>
+                        <span class="info-separator">
+                            :
+                        </span>
 
-                    <span class="info-value">
-                        {{ $laporan->tanggal_pengecekan ? $laporan->tanggal_pengecekan->format('d F Y') : 'Belum dilakukan' }}
-                    </span>
+                        <span class="info-value">
+                            {{ $laporan->tanggal_pengecekan ? $laporan->tanggal_pengecekan->format('d F Y') : 'Belum dilakukan' }}
+                        </span>
 
+                    </div>
                 </div>
 
-            </div>
+                <div class="verification-photo-block">
 
-            <div class="description-label" style="margin-top: 18px;">
-                Foto Bukti Pengecekan
-            </div>
+                    <div class="description-label" style="margin-bottom: 10px;">
+                        Foto Bukti Pengecekan
+                    </div>
 
-            @if($laporan->foto_pengecekan)
+                    @if($laporan->foto_pengecekan)
 
-                <div class="photo-grid">
+                        <div class="photo-grid">
 
-                    <a
-                        href="{{ asset('storage/' . $laporan->foto_pengecekan) }}"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="photo-item"
-                    >
+                            <a
+                                href="{{ asset('storage/' . $laporan->foto_pengecekan) }}"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="photo-item"
+                            >
 
-                        <img
-                            src="{{ asset('storage/' . $laporan->foto_pengecekan) }}"
-                            alt="Foto bukti pengecekan lapangan"
-                        >
+                                <img
+                                    src="{{ asset('storage/' . $laporan->foto_pengecekan) }}"
+                                    alt="Foto bukti pengecekan lapangan"
+                                >
 
-                        <div class="photo-overlay">
-                            Klik untuk melihat foto
+                                <div class="photo-overlay">
+                                    Klik untuk melihat foto
+                                </div>
+
+                            </a>
+
                         </div>
 
-                    </a>
+                    @else
+
+                        <div class="no-photo">
+                            Belum ada foto bukti pengecekan.
+                        </div>
+
+                    @endif
 
                 </div>
 
-            @else
-
-                <div class="no-photo">
-                    Belum ada foto bukti pengecekan.
-                </div>
-
-            @endif
+            </div>
 
         </div>
 
