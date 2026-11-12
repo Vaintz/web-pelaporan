@@ -1063,6 +1063,30 @@
 
 
 
+                {{-- PENGECEKAN LAPANGAN --}}
+
+                <div class="timeline-item">
+
+                    <div class="timeline-dot {{ $laporan->tanggal_pengecekan ? 'active' : '' }}"></div>
+
+                    <div class="timeline-line"></div>
+
+                    <div class="timeline-content">
+
+                        <div class="timeline-title">
+                            Pengecekan Lapangan
+                        </div>
+
+                        <div class="timeline-date">
+                            {{ $laporan->tanggal_pengecekan ? $laporan->tanggal_pengecekan->format('d F Y') : 'Belum dilakukan' }}
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
                 {{-- DITERUSKAN KE BIRO --}}
 
                 <div class="timeline-item">
