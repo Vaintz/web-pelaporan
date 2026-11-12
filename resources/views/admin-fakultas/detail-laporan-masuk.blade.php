@@ -454,7 +454,9 @@
         border-radius: 6px;
         background: #29283c;
         color: #fff;
-        font: 600 11px inherit;
+        font-family: inherit;
+        font-size: 11px;
+        font-weight: 600;
         cursor: pointer;
     }
 
