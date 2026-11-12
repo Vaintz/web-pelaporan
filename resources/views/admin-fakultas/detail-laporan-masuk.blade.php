@@ -1067,6 +1067,7 @@
         <form
             action="{{ route('admin.fakultas.laporan.proses', $laporan->id) }}"
             method="POST"
+            enctype="multipart/form-data"
             id="formVerifikasi"
             class="verification-form"
         >
@@ -1123,6 +1124,52 @@
 
                 </div>
 
+
+                {{-- TANGGAL PENGECEKAN --}}
+
+                <div class="verification-row">
+                    <label for="tanggal_pengecekan" class="verification-label">
+                        Tanggal Pengecekan
+                    </label>
+                    <div class="verification-colon">:</div>
+                    <div class="verification-field">
+                        <input
+                            type="date"
+                            name="tanggal_pengecekan"
+                            id="tanggal_pengecekan"
+                            class="verification-select"
+                            value="{{ old('tanggal_pengecekan') }}"
+                            max="{{ date('Y-m-d') }}"
+                            required
+                        >
+                        @error('tanggal_pengecekan')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                </div>
+
+                {{-- FOTO BUKTI PENGECEKAN --}}
+
+                <div class="verification-row">
+                    <label for="foto_pengecekan" class="verification-label">
+                        Foto Pengecekan
+                    </label>
+                    <div class="verification-colon">:</div>
+                    <div class="verification-field">
+                        <input
+                            type="file"
+                            name="foto_pengecekan"
+                            id="foto_pengecekan"
+                            class="verification-select"
+                            accept="image/jpeg,image/png,image/webp"
+                            required
+                        >
+                        <small>Format JPG, JPEG, PNG, WEBP. Maksimal 5 MB.</small>
+                        @error('foto_pengecekan')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                </div>
 
                 {{-- CATATAN VERIFIKASI --}}
 
