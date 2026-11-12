@@ -203,7 +203,7 @@
 
         .report-table {
             width: 100%;
-            min-width: 1250px;
+            min-width: 1450px;
             border-collapse: collapse;
             table-layout: fixed;
         }
@@ -250,7 +250,11 @@
         .report-table th:nth-child(8),
         .report-table td:nth-child(8),
         .report-table th:nth-child(9),
-        .report-table td:nth-child(9) { width: 9%; }
+        .report-table td:nth-child(9) {
+            width: 10%;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
         .report-table th:nth-child(10),
         .report-table td:nth-child(10) { width: 7%; text-align: center; }
         .report-table th:nth-child(11),
