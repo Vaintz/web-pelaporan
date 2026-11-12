@@ -115,9 +115,32 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, .07);
         }
 
+        .btn-export-excel {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            min-height: 44px;
+            padding: 0 18px;
+            border: 1px solid #16834a;
+            border-radius: 8px;
+            background: #16834a;
+            color: #fff;
+            font-size: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background .2s ease;
+            white-space: nowrap;
+        }
+
+        .btn-export-excel:hover {
+            background: #116b3c;
+            color: #fff;
+        }
+
         .filter-form {
             display: grid;
-            grid-template-columns: 1.7fr 1fr 1fr 1fr;
+            grid-template-columns: 1.7fr 1fr 1fr 1fr auto;
             gap: 12px;
         }
 
@@ -180,6 +203,7 @@
 
         .report-table {
             width: 100%;
+            min-width: 1250px;
             border-collapse: collapse;
             table-layout: fixed;
         }
@@ -210,46 +234,27 @@
         }
 
         .report-table th:nth-child(1),
-        .report-table td:nth-child(1) {
-            width: 13%;
-        }
-
+        .report-table td:nth-child(1) { width: 10%; }
         .report-table th:nth-child(2),
-        .report-table td:nth-child(2) {
-            width: 18%;
-        }
-
+        .report-table td:nth-child(2) { width: 15%; }
         .report-table th:nth-child(3),
-        .report-table td:nth-child(3) {
-            width: 14%;
-        }
-
+        .report-table td:nth-child(3) { width: 10%; }
         .report-table th:nth-child(4),
-        .report-table td:nth-child(4) {
-            width: 13%;
-        }
-
+        .report-table td:nth-child(4) { width: 8%; }
         .report-table th:nth-child(5),
-        .report-table td:nth-child(5) {
-            width: 14%;
-        }
-
+        .report-table td:nth-child(5) { width: 9%; }
         .report-table th:nth-child(6),
-        .report-table td:nth-child(6) {
-            width: 11%;
-        }
-
+        .report-table td:nth-child(6),
         .report-table th:nth-child(7),
-        .report-table td:nth-child(7) {
-            width: 10%;
-            text-align: center;
-        }
-
+        .report-table td:nth-child(7),
         .report-table th:nth-child(8),
-        .report-table td:nth-child(8) {
-            width: 7%;
-            text-align: center;
-        }
+        .report-table td:nth-child(8),
+        .report-table th:nth-child(9),
+        .report-table td:nth-child(9) { width: 9%; }
+        .report-table th:nth-child(10),
+        .report-table td:nth-child(10) { width: 7%; text-align: center; }
+        .report-table th:nth-child(11),
+        .report-table td:nth-child(11) { width: 5%; text-align: center; }
 
         .report-number {
             font-weight: 600;
@@ -706,6 +711,18 @@
 
             </select>
 
+            <a
+                href="{{ route('admin.biro.riwayat.export', request()->query()) }}"
+                class="btn-export-excel"
+            >
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                    <path d="M14 2v6h6" />
+                    <path d="M8 13h8M8 17h8" />
+                </svg>
+                Export
+            </a>
+
         </form>
 
     </div>
@@ -737,7 +754,13 @@
 
                             <th>Teknisi</th>
 
-                            <th>Tanggal</th>
+                            <th>Tanggal Laporan</th>
+
+                            <th>Tanggal Pengecekan</th>
+
+                            <th>Tanggal Diverifikasi</th>
+
+                            <th>Tanggal Selesai</th>
 
                             <th>Status</th>
 
@@ -806,14 +829,36 @@
                                         </td>
 
 
-                                        {{-- TANGGAL --}}
+                                        {{-- TANGGAL LAPORAN --}}
 
                                         <td>
-
                                             <div class="date">
-                                                {{ $laporan->created_at->format('d/m/Y') }}
+                                                {{ $laporan->created_at?->format('d/m/Y') ?? '-' }}
                                             </div>
+                                        </td>
 
+                                        {{-- TANGGAL PENGECEKAN --}}
+
+                                        <td>
+                                            <div class="date">
+                                                {{ $laporan->tanggal_pengecekan?->format('d/m/Y') ?? '-' }}
+                                            </div>
+                                        </td>
+
+                                        {{-- TANGGAL DIVERIFIKASI --}}
+
+                                        <td>
+                                            <div class="date">
+                                                {{ $laporan->diverifikasi_biro_at?->format('d/m/Y') ?? '-' }}
+                                            </div>
+                                        </td>
+
+                                        {{-- TANGGAL SELESAI --}}
+
+                                        <td>
+                                            <div class="date">
+                                                {{ $laporan->status === 'selesai' ? ($laporan->updated_at?->format('d/m/Y') ?? '-') : '-' }}
+                                            </div>
                                         </td>
 
 
