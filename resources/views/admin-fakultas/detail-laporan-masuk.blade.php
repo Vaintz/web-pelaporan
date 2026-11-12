@@ -345,6 +345,20 @@
         font-weight: 500;
     }
 
+    .timeline-proof {
+        display: inline-block;
+        margin-top: 8px;
+    }
+
+    .timeline-proof img {
+        display: block;
+        width: 100px;
+        height: 72px;
+        object-fit: cover;
+        border: 1px solid #dcdde4;
+        border-radius: 7px;
+    }
+
     .timeline-current {
         position: absolute;
         right: 0;
@@ -1080,6 +1094,20 @@
                         <div class="timeline-date">
                             {{ $laporan->tanggal_pengecekan ? $laporan->tanggal_pengecekan->format('d F Y') : 'Belum dilakukan' }}
                         </div>
+
+                        @if($laporan->foto_pengecekan)
+                            <a
+                                href="{{ asset('storage/' . $laporan->foto_pengecekan) }}"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="timeline-proof"
+                            >
+                                <img
+                                    src="{{ asset('storage/' . $laporan->foto_pengecekan) }}"
+                                    alt="Foto bukti pengecekan"
+                                >
+                            </a>
+                        @endif
 
                     </div>
 
