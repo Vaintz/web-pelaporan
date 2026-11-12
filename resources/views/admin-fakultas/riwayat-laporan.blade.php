@@ -241,7 +241,8 @@
 
     .report-table th:nth-child(7),
     .report-table td:nth-child(7) {
-        width: 12%;
+        width: 14%;
+        padding-left: 28px;
     }
 
     .report-table th:nth-child(8),
