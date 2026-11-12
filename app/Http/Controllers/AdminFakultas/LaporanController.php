@@ -294,7 +294,7 @@ class LaporanController extends Controller
 
         return response()->streamDownload(function () use ($laporans) {
             $handle = fopen('php://output', 'w');
-            fwrite($handle, "\\xEF\\xBB\\xBF");
+            fwrite($handle, "\xEF\xBB\xBF");
 
             fputcsv($handle, [
                 'No. Laporan',
