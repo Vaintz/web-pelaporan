@@ -669,7 +669,7 @@
                     @endif
 
                     <div class="inspection-date">
-                        **Tanggal Pengecekan:** {{ $laporan->tanggal_pengecekan?->format('d F Y') ?? '-' }}
+                        <strong>Tanggal Pengecekan:</strong> {{ $laporan->tanggal_pengecekan?->format('d F Y') ?? '-' }}
                     </div>
                 </div>
 
