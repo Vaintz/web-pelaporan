@@ -1124,7 +1124,22 @@
                         Fakultas
                     </span>
 
-               {{-- =================================================
+                    <span class="info-separator">
+                        :
+                    </span>
+
+                    <span class="info-value">
+                        {{ $laporan->user->fakultas ?? '-' }}
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        {{-- =================================================
            5. BUKTI KERUSAKAN
         ================================================== --}}
 
@@ -1283,34 +1298,6 @@
             </div>
 
         </div>
-
-        </div>
-
-
-                   <img
-                                    src="{{ asset('storage/' . $laporan->foto_pengecekan) }}"
-                                    alt="Foto bukti pengecekan lapangan"
-                                >
-
-                                <div class="photo-overlay">
-                                    Klik untuk melihat foto
-                                </div>
-
-                            </a>
-
-                        </div>
-
-                    @else
-
-                        <div class="no-photo">
-                            Belum ada foto bukti pengecekan.
-                        </div>
-
-                    @endif
-
-                </div>
-
-            </div>
 
         </div>
 
