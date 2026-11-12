@@ -346,6 +346,24 @@
         gap: 12px;
     }
 
+    .evidence-check-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+    }
+
+    .inspection-date {
+        margin-top: 12px;
+        color: #555b69;
+        font-size: 11px;
+    }
+
+    @media (max-width: 800px) {
+        .evidence-check-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
     .photo-item {
         aspect-ratio: 1 / 1;
         border-radius: 10px;
@@ -611,45 +629,54 @@
 
 
     {{-- =========================
-         FOTO LAPORAN
+         BUKTI KERUSAKAN & PENGECEKAN
     ========================== --}}
 
-    @if($laporan->foto && $laporan->foto->count())
+    <div class="section-card">
 
-        <div class="section-card">
+        <div class="section-header">
+            <h2 class="section-title">Bukti Kerusakan dan Pengecekan</h2>
+        </div>
 
-            <div class="section-header">
+        <div class="section-content">
+            <div class="evidence-check-grid">
 
-                <h2 class="section-title">
-                    Foto Laporan
-                </h2>
-
-            </div>
-
-            <div class="section-content">
-
-                <div class="photo-grid">
-
-                    @foreach($laporan->foto as $foto)
-
-                        <div class="photo-item">
-
-                            <img
-                                src="{{ asset('storage/' . $foto->foto) }}"
-                                alt="Foto laporan"
-                            >
-
+                <div>
+                    <div class="info-label">Foto Bukti Kerusakan</div>
+                    @if($laporan->foto && $laporan->foto->count())
+                        <div class="photo-grid">
+                            @foreach($laporan->foto as $foto)
+                                <a href="{{ asset('storage/' . $foto->foto) }}" target="_blank" rel="noopener noreferrer" class="photo-item">
+                                    <img src="{{ asset('storage/' . $foto->foto) }}" alt="Foto bukti kerusakan">
+                                </a>
+                            @endforeach
                         </div>
+                    @else
+                        <div class="empty-photo">Tidak ada foto bukti kerusakan.</div>
+                    @endif
+                </div>
 
-                    @endforeach
+                <div>
+                    <div class="info-label">Foto Pengecekan</div>
+                    @if($laporan->foto_pengecekan)
+                        <div class="photo-grid">
+                            <a href="{{ asset('storage/' . $laporan->foto_pengecekan) }}" target="_blank" rel="noopener noreferrer" class="photo-item">
+                                <img src="{{ asset('storage/' . $laporan->foto_pengecekan) }}" alt="Foto pengecekan">
+                            </a>
+                        </div>
+                    @else
+                        <div class="empty-photo">Belum ada foto pengecekan.</div>
+                    @endif
 
+                    <div class="inspection-date">
+                        **Tanggal Pengecekan:** {{ $laporan->tanggal_pengecekan?->format('d F Y') ?? '-' }}
+                    </div>
                 </div>
 
             </div>
-
         </div>
 
-    @endif
+    </div>
 
 
     {{-- =========================
