@@ -238,8 +238,8 @@ class LaporanController extends Controller
         $laporan->update([
             'status' => 'ditolak',
             'catatan_verifikasi' => $request->catatan_verifikasi,
-                'tanggal_pengecekan' => $validated['tanggal_pengecekan'],
-                'foto_pengecekan' => $fotoPengecekan,
+            'tanggal_pengecekan' => $validated['tanggal_pengecekan'],
+            'foto_pengecekan' => $fotoPengecekan,
         ]);
 
         return redirect()
