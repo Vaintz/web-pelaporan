@@ -198,10 +198,23 @@ class LaporanController extends Controller
                 ->with('error', 'Laporan sudah diproses.');
         }
 
-        $request->validate([
+        $validated = $request->validate([
             'status_verifikasi' => 'required|in:valid,tidak_valid',
             'catatan_verifikasi' => 'nullable|string',
+            'tanggal_pengecekan' => 'required|date|before_or_equal:today',
+            'foto_pengecekan' => 'required|image|mimes:jpg,jpeg,png,webp|max:5120',
+        ], [
+            'tanggal_pengecekan.required' => 'Tanggal pengecekan wajib diisi.',
+            'tanggal_pengecekan.date' => 'Format tanggal pengecekan tidak valid.',
+            'tanggal_pengecekan.before_or_equal' => 'Tanggal pengecekan tidak boleh melebihi hari ini.',
+            'foto_pengecekan.required' => 'Foto bukti pengecekan wajib diunggah.',
+            'foto_pengecekan.image' => 'Bukti pengecekan harus berupa gambar.',
+            'foto_pengecekan.mimes' => 'Format foto harus JPG, JPEG, PNG, atau WEBP.',
+            'foto_pengecekan.max' => 'Ukuran foto maksimal 5 MB.',
         ]);
+
+        $fotoPengecekan = $request->file('foto_pengecekan')
+            ->store('bukti-pengecekan', 'public');
 
         // Jika valid, laporan diteruskan ke biro
         if ($request->status_verifikasi === 'valid') {
@@ -209,6 +222,8 @@ class LaporanController extends Controller
             $laporan->update([
                 'status' => 'diproses',
                 'catatan_verifikasi' => $request->catatan_verifikasi,
+                'tanggal_pengecekan' => $validated['tanggal_pengecekan'],
+                'foto_pengecekan' => $fotoPengecekan,
             ]);
 
             return redirect()
@@ -223,6 +238,8 @@ class LaporanController extends Controller
         $laporan->update([
             'status' => 'ditolak',
             'catatan_verifikasi' => $request->catatan_verifikasi,
+                'tanggal_pengecekan' => $validated['tanggal_pengecekan'],
+                'foto_pengecekan' => $fotoPengecekan,
         ]);
 
         return redirect()
