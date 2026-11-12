@@ -744,7 +744,7 @@
                             <div class="no-photo">Belum ada foto pengecekan.</div>
                         @endif
                         <div class="inspection-date">
-                            **Tanggal Pengecekan:** {{ $laporan->tanggal_pengecekan?->format('d/m/Y') ?? '-' }}
+                            <strong>Tanggal Pengecekan:</strong> {{ $laporan->tanggal_pengecekan?->format('d/m/Y') ?? '-' }}
                         </div>
                     </div>
                 </div>
