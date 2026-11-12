@@ -252,6 +252,87 @@ class LaporanController extends Controller
 
 
     /**
+     * Export data riwayat laporan Admin Fakultas ke CSV yang dapat dibuka di Excel.
+     */
+    public function exportRiwayatAdminFakultas(Request $request)
+    {
+        $query = Laporan::with(['kategori', 'user'])
+            ->whereIn('status', ['diproses', 'selesai', 'ditolak']);
+
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('judul_laporan', 'like', '%' . $search . '%')
+                    ->orWhere('nomor_laporan', 'like', '%' . $search . '%');
+            });
+        }
+
+        if ($request->filled('status') && in_array($request->status, ['diproses', 'selesai', 'ditolak'])) {
+            $query->where('status', $request->status);
+        }
+
+        if ($request->filled('kategori')) {
+            $query->where('kategori_kerusakan_id', $request->kategori);
+        }
+
+        if ($request->filled('tanggal')) {
+            switch ($request->tanggal) {
+                case 'hari_ini':
+                    $query->whereDate('created_at', today());
+                    break;
+                case '7_hari':
+                    $query->where('created_at', '>=', now()->subDays(7));
+                    break;
+                case '30_hari':
+                    $query->where('created_at', '>=', now()->subDays(30));
+                    break;
+            }
+        }
+
+        $laporans = $query->latest()->get();
+        $filename = 'riwayat-laporan-' . now()->format('Y-m-d-His') . '.csv';
+
+        return response()->streamDownload(function () use ($laporans) {
+            $handle = fopen('php://output', 'w');
+            fwrite($handle, "\\xEF\\xBB\\xBF");
+
+            fputcsv($handle, [
+                'No. Laporan',
+                'Judul Laporan',
+                'Pelapor',
+                'Kategori',
+                'Tanggal Laporan',
+                'Tanggal Pengecekan',
+                'Status',
+            ]);
+
+            foreach ($laporans as $laporan) {
+                $status = match ($laporan->status) {
+                    'diproses' => 'Dalam Proses',
+                    'selesai' => 'Selesai',
+                    'ditolak' => 'Ditolak',
+                    default => $laporan->status,
+                };
+
+                fputcsv($handle, [
+                    $laporan->nomor_laporan,
+                    $laporan->judul_laporan,
+                    $laporan->user->name ?? '-',
+                    $laporan->kategori->nama ?? '-',
+                    $laporan->created_at?->format('d/m/Y') ?? '-',
+                    $laporan->tanggal_pengecekan?->format('d/m/Y') ?? '-',
+                    $status,
+                ]);
+            }
+
+            fclose($handle);
+        }, $filename, [
+            'Content-Type' => 'text/csv; charset=UTF-8',
+        ]);
+    }
+
+
+    /**
      * ==========================================
      * RIWAYAT LAPORAN ADMIN FAKULTAS
      * ==========================================
