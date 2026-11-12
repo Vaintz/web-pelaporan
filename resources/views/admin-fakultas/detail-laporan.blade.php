@@ -459,13 +459,32 @@
     .evidence-check-grid {
         display: grid;
         grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-        gap: 28px;
+        gap: 34px;
+        padding: 0 0 8px;
         border-bottom: 1px solid #e4e6eb;
     }
 
     .evidence-check-grid > .detail-section {
         min-width: 0;
+        padding: 20px 0 24px;
         border-bottom: 0;
+    }
+
+    .evidence-check-grid > .detail-section + .detail-section {
+        padding-left: 28px;
+        border-left: 1px solid #edf0f4;
+    }
+
+    .evidence-check-grid .photo-grid {
+        gap: 12px;
+    }
+
+    .evidence-check-grid .photo-item {
+        width: 210px;
+        height: 135px;
+        max-width: 100%;
+        border: 1px solid #cbd2df;
+        border-radius: 10px;
     }
 
     @media (max-width: 700px) {
@@ -474,8 +493,14 @@
             gap: 0;
         }
 
-        .evidence-check-grid > .detail-section:first-of-type {
-            border-bottom: 1px solid #e4e6eb;
+        .evidence-check-grid > .detail-section {
+            padding: 20px 0;
+        }
+
+        .evidence-check-grid > .detail-section + .detail-section {
+            padding-left: 0;
+            border-left: 0;
+            border-top: 1px solid #edf0f4;
         }
     }
 
@@ -485,10 +510,25 @@
     ========================================================= */
 
     .verification-result-grid {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 18px;
+    }
+
+    .verification-date-row {
         display: grid;
-        grid-template-columns: minmax(220px, 1fr) minmax(220px, 1fr);
+        grid-template-columns: 145px 14px minmax(0, 1fr);
         align-items: start;
-        gap: 24px;
+        gap: 0;
+        padding: 11px 13px;
+        background: #f8f9fc;
+        border: 1px solid #e8ebf1;
+        border-radius: 8px;
+    }
+
+    .verification-date-row .info-value {
+        white-space: nowrap;
     }
 
     .verification-photo-block {
@@ -496,9 +536,8 @@
     }
 
     @media (max-width: 600px) {
-        .verification-result-grid {
-            grid-template-columns: 1fr;
-            gap: 18px;
+        .verification-date-row {
+            grid-template-columns: 125px 12px minmax(0, 1fr);
         }
     }
 
@@ -1237,22 +1276,20 @@
 
             <div class="verification-result-grid">
 
-                <div>
-                    <div class="info-row">
+                <div class="info-row verification-date-row">
 
-                        <span class="info-label">
-                            Tanggal Pengecekan
-                        </span>
+                    <span class="info-label">
+                        Tanggal Pengecekan
+                    </span>
 
-                        <span class="info-separator">
-                            :
-                        </span>
+                    <span class="info-separator">
+                        :
+                    </span>
 
-                        <span class="info-value">
-                            {{ $laporan->tanggal_pengecekan ? $laporan->tanggal_pengecekan->format('d F Y') : 'Belum dilakukan' }}
-                        </span>
+                    <span class="info-value">
+                        {{ $laporan->tanggal_pengecekan ? $laporan->tanggal_pengecekan->format('d F Y') : 'Belum dilakukan' }}
+                    </span>
 
-                    </div>
                 </div>
 
                 <div class="verification-photo-block">
