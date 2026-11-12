@@ -453,6 +453,34 @@
 
 
     /* =========================================================
+       BUKTI KERUSAKAN & PENGECEKAN
+    ========================================================= */
+
+    .evidence-check-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 28px;
+        border-bottom: 1px solid #e4e6eb;
+    }
+
+    .evidence-check-grid > .detail-section {
+        min-width: 0;
+        border-bottom: 0;
+    }
+
+    @media (max-width: 700px) {
+        .evidence-check-grid {
+            grid-template-columns: 1fr;
+            gap: 0;
+        }
+
+        .evidence-check-grid > .detail-section:first-of-type {
+            border-bottom: 1px solid #e4e6eb;
+        }
+    }
+
+
+    /* =========================================================
        HASIL PENGECEKAN
     ========================================================= */
 
@@ -1096,41 +1124,11 @@
                         Fakultas
                     </span>
 
-                    <span class="info-separator">
-                        :
-                    </span>
-
-                    <span class="info-value">
-                        {{ $laporan->user->fakultas ?? '-' }}
-                    </span>
-
-                </div>
-
-
-                <div class="info-row">
-
-                    <span class="info-label">
-                        Nomor HP
-                    </span>
-
-                    <span class="info-separator">
-                        :
-                    </span>
-
-                    <span class="info-value">
-                        {{ $laporan->user->no_hp ?? '-' }}
-                    </span>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        {{-- =================================================
+               {{-- =================================================
            5. BUKTI KERUSAKAN
         ================================================== --}}
+
+        <div class="evidence-check-grid">
 
         <div class="detail-section">
 
@@ -1260,6 +1258,36 @@
                             >
 
                                 <img
+                                    src="{{ asset('storage/' . $laporan->foto_pengecekan) }}"
+                                    alt="Foto bukti pengecekan lapangan"
+                                >
+
+                                <div class="photo-overlay">
+                                    Klik untuk melihat foto
+                                </div>
+
+                            </a>
+
+                        </div>
+
+                    @else
+
+                        <div class="no-photo">
+                            Belum ada foto bukti pengecekan.
+                        </div>
+
+                    @endif
+
+                </div>
+
+            </div>
+
+        </div>
+
+        </div>
+
+
+                   <img
                                     src="{{ asset('storage/' . $laporan->foto_pengecekan) }}"
                                     alt="Foto bukti pengecekan lapangan"
                                 >
