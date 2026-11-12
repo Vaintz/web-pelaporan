@@ -304,7 +304,7 @@ class LaporanController extends Controller
                 'Tanggal Laporan',
                 'Tanggal Pengecekan',
                 'Status',
-            ]);
+            ], ';');
 
             foreach ($laporans as $laporan) {
                 $status = match ($laporan->status) {
@@ -322,7 +322,7 @@ class LaporanController extends Controller
                     $laporan->created_at?->format('d/m/Y') ?? '-',
                     $laporan->tanggal_pengecekan?->format('d/m/Y') ?? '-',
                     $status,
-                ]);
+                ], ';');
             }
 
             fclose($handle);
