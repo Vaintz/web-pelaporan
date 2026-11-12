@@ -357,6 +357,9 @@ Route::middleware(['auth', 'role:admin_biro'])
             ->name('laporan.verifikasi');
 
         // RIWAYAT LAPORAN
+        Route::get('/riwayat-laporan/export', [AdminBiroLaporanController::class, 'exportRiwayatAdminBiro'])
+            ->name('riwayat.export');
+
         Route::get('/riwayat-laporan', [AdminBiroLaporanController::class, 'riwayatAdminBiro'])
             ->name('riwayat');
 
