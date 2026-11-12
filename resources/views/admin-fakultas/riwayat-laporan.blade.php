@@ -115,19 +115,13 @@
         box-shadow: 0 2px 4px rgba(0,0,0,.07);
     }
 
-    .export-actions {
-        display: flex;
-        justify-content: flex-end;
-        margin-top: 14px;
-    }
-
     .btn-export-excel {
         display: inline-flex;
         align-items: center;
         justify-content: center;
         gap: 8px;
-        min-height: 38px;
-        padding: 0 16px;
+        min-height: 44px;
+        padding: 0 18px;
         border: 1px solid #16834a;
         border-radius: 8px;
         background: #16834a;
@@ -145,7 +139,7 @@
 
     .filter-form {
         display: grid;
-        grid-template-columns: 1.7fr 1fr 1fr 1fr;
+        grid-template-columns: 1.7fr 1fr 1fr 1fr auto;
         gap: 12px;
     }
 
@@ -800,21 +794,14 @@
 
         </select>
 
-    </form>
-
-    <div class="export-actions">
         <a
             href="{{ route('admin.fakultas.riwayat.export', request()->query()) }}"
             class="btn-export-excel"
         >
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                <path d="M14 2v6h6" />
-                <path d="M8 13h8M8 17h8" />
-            </svg>
-            Export Excel
+            Export
         </a>
-    </div>
+
+    </form>
 
 </div>
 
