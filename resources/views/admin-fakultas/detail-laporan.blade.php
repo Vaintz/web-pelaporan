@@ -1276,27 +1276,7 @@
 
             <div class="verification-result-grid">
 
-                <div class="info-row verification-date-row">
-
-                    <span class="info-label">
-                        Tanggal Pengecekan
-                    </span>
-
-                    <span class="info-separator">
-                        :
-                    </span>
-
-                    <span class="info-value">
-                        {{ $laporan->tanggal_pengecekan ? $laporan->tanggal_pengecekan->format('d F Y') : 'Belum dilakukan' }}
-                    </span>
-
-                </div>
-
                 <div class="verification-photo-block">
-
-                    <div class="description-label" style="margin-bottom: 10px;">
-                        Foto Bukti Pengecekan
-                    </div>
 
                     @if($laporan->foto_pengecekan)
 
@@ -1329,6 +1309,22 @@
                         </div>
 
                     @endif
+
+                </div>
+
+                <div class="info-row verification-date-row">
+
+                    <span class="info-label">
+                        Tanggal Pengecekan
+                    </span>
+
+                    <span class="info-separator">
+                        :
+                    </span>
+
+                    <span class="info-value">
+                        {{ $laporan->tanggal_pengecekan ? $laporan->tanggal_pengecekan->format('d F Y') : 'Belum dilakukan' }}
+                    </span>
 
                 </div>
 
