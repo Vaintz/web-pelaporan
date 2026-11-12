@@ -211,36 +211,41 @@
 
     .report-table th:nth-child(1),
     .report-table td:nth-child(1) {
-        width: 14%;
+        width: 12%;
     }
 
     .report-table th:nth-child(2),
     .report-table td:nth-child(2) {
-        width: 20%;
+        width: 18%;
     }
 
     .report-table th:nth-child(3),
     .report-table td:nth-child(3) {
-        width: 16%;
+        width: 14%;
     }
 
     .report-table th:nth-child(4),
     .report-table td:nth-child(4) {
-        width: 14%;
+        width: 12%;
     }
 
     .report-table th:nth-child(5),
     .report-table td:nth-child(5) {
-        width: 13%;
+        width: 11%;
     }
 
     .report-table th:nth-child(6),
     .report-table td:nth-child(6) {
-        width: 13%;
+        width: 11%;
     }
 
     .report-table th:nth-child(7),
     .report-table td:nth-child(7) {
+        width: 12%;
+    }
+
+    .report-table th:nth-child(8),
+    .report-table td:nth-child(8) {
         width: 10%;
         text-align: center;
     }
@@ -795,7 +800,9 @@
 
                         <th>Kategori</th>
 
-                        <th>Tanggal</th>
+                        <th>Tanggal Laporan</th>
+
+                        <th>Tanggal Pengecekan</th>
 
                         <th>Status</th>
 
@@ -855,12 +862,23 @@
                             </td>
 
 
-                            {{-- TANGGAL --}}
+                            {{-- TANGGAL LAPORAN --}}
 
                             <td>
 
                                 <div class="date">
                                     {{ $laporan->created_at->format('d/m/Y') }}
+                                </div>
+
+                            </td>
+
+
+                            {{-- TANGGAL PENGECEKAN --}}
+
+                            <td>
+
+                                <div class="date">
+                                    {{ $laporan->tanggal_pengecekan ? $laporan->tanggal_pengecekan->format('d/m/Y') : '-' }}
                                 </div>
 
                             </td>
