@@ -252,6 +252,11 @@ Route::middleware(['auth', 'role:admin_fakultas'])->group(function () {
     )->name('admin.fakultas.laporan.proses');
 
     Route::get(
+        '/admin-fakultas/riwayat-laporan/export',
+        [AdminFakultasLaporanController::class, 'exportRiwayatAdminFakultas']
+    )->name('admin.fakultas.riwayat.export');
+
+    Route::get(
         '/admin-fakultas/riwayat-laporan',
         [AdminFakultasLaporanController::class, 'riwayatAdminFakultas']
     )->name('admin.fakultas.riwayat');
