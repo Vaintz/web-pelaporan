@@ -153,6 +153,24 @@
             flex-wrap: wrap;
         }
 
+        .evidence-check-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .inspection-date {
+            margin-top: 12px;
+            color: #555b69;
+            font-size: 12px;
+        }
+
+        @media (max-width: 700px) {
+            .evidence-check-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
         .photo-item {
             position: relative;
             width: 150px;
@@ -694,42 +712,42 @@
 
 
             {{-- =========================
-            BUKTI / LAMPIRAN
+            BUKTI KERUSAKAN & PENGECEKAN
             ========================= --}}
             <div class="detail-card full">
+                <h3 class="card-title">BUKTI KERUSAKAN DAN PENGECEKAN</h3>
 
-                <h3 class="card-title">
-                    BUKTI / LAMPIRAN
-                </h3>
+                <div class="evidence-check-grid">
+                    <div>
+                        <div class="card-title">Foto Bukti Kerusakan</div>
+                        @if ($laporan->foto && $laporan->foto->count() > 0)
+                            <div class="photo-list">
+                                @foreach ($laporan->foto as $foto)
+                                    <a href="{{ asset('storage/' . $foto->foto) }}" target="_blank" rel="noopener noreferrer" class="photo-item">
+                                        <img src="{{ asset('storage/' . $foto->foto) }}" alt="Foto bukti kerusakan">
+                                        <span class="photo-zoom">⌕</span>
+                                    </a>
+                                @endforeach
+                            </div>
+                        @else
+                            <div class="no-photo">Tidak ada lampiran foto.</div>
+                        @endif
+                    </div>
 
-                @if ($laporan->foto && $laporan->foto->count() > 0)
-
-                    <div class="photo-list">
-
-                        @foreach ($laporan->foto as $foto)
-
-                            <a href="{{ asset('storage/' . $foto->foto) }}" target="_blank" class="photo-item">
-
-                                <img src="{{ asset('storage/' . $foto->foto) }}" alt="Foto laporan">
-
-                                <span class="photo-zoom">
-                                    ⌕
-                                </span>
-
+                    <div>
+                        <div class="card-title">Foto Pengecekan</div>
+                        @if ($laporan->foto_pengecekan)
+                            <a href="{{ asset('storage/' . $laporan->foto_pengecekan) }}" target="_blank" rel="noopener noreferrer" class="photo-item">
+                                <img src="{{ asset('storage/' . $laporan->foto_pengecekan) }}" alt="Foto pengecekan">
                             </a>
-
-                        @endforeach
-
+                        @else
+                            <div class="no-photo">Belum ada foto pengecekan.</div>
+                        @endif
+                        <div class="inspection-date">
+                            **Tanggal Pengecekan:** {{ $laporan->tanggal_pengecekan?->format('d/m/Y') ?? '-' }}
+                        </div>
                     </div>
-
-                @else
-
-                    <div class="no-photo">
-                        Tidak ada lampiran foto.
-                    </div>
-
-                @endif
-
+                </div>
             </div>
 
         </div>
