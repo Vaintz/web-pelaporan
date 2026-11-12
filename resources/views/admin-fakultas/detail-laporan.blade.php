@@ -1174,6 +1174,91 @@
 
 
         {{-- =================================================
+           6. HASIL PENGECEKAN LAPANGAN
+        ================================================== --}}
+
+        <div class="detail-section">
+
+            <div class="section-title">
+
+                <span class="section-icon">
+
+                    <svg viewBox="0 0 24 24">
+                        <rect x="3" y="4" width="18" height="17" rx="2"></rect>
+                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                        <path d="m8 15 2 2 5-5"></path>
+                    </svg>
+
+                </span>
+
+                <span>
+                    6. Hasil Pengecekan Lapangan
+                </span>
+
+            </div>
+
+            <div class="info-grid">
+
+                <div class="info-row">
+
+                    <span class="info-label">
+                        Tanggal Pengecekan
+                    </span>
+
+                    <span class="info-separator">
+                        :
+                    </span>
+
+                    <span class="info-value">
+                        {{ $laporan->tanggal_pengecekan ? $laporan->tanggal_pengecekan->format('d F Y') : 'Belum dilakukan' }}
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="description-label" style="margin-top: 18px;">
+                Foto Bukti Pengecekan
+            </div>
+
+            @if($laporan->foto_pengecekan)
+
+                <div class="photo-grid">
+
+                    <a
+                        href="{{ asset('storage/' . $laporan->foto_pengecekan) }}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="photo-item"
+                    >
+
+                        <img
+                            src="{{ asset('storage/' . $laporan->foto_pengecekan) }}"
+                            alt="Foto bukti pengecekan lapangan"
+                        >
+
+                        <div class="photo-overlay">
+                            Klik untuk melihat foto
+                        </div>
+
+                    </a>
+
+                </div>
+
+            @else
+
+                <div class="no-photo">
+                    Belum ada foto bukti pengecekan.
+                </div>
+
+            @endif
+
+        </div>
+
+
+        {{-- =================================================
            STATUS NOTE
         ================================================== --}}
 
